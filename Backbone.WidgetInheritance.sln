@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. UI", "1. UI", "{E5D075BF-48E4-4D4C-BDF7-11DB0B7D6606}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. API", "2. API", "{853EFB4C-C274-4423-86BA-E15051FE9FB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backbone.WidgetInheritance.Controller", "Backbone.WidgetInheritance.Controller\Backbone.WidgetInheritance.Controller.csproj", "{9E858F33-070D-4BFA-994C-D1296B3FC601}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backboen.WidgetInheritance.Provider", "Backboen.WidgetInheritance.Provider\Backboen.WidgetInheritance.Provider.csproj", "{A82434E0-8CB6-4AFC-8B50-BCBFEDD4F16A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backboen.WidgetInheritance.Model", "Backboen.WidgetInheritance.Model\Backboen.WidgetInheritance.Model.csproj", "{03138A50-1E60-422C-A8EC-E257EC15D33A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backboen.WidgetInheritance.Datacontract", "Backboen.WidgetInheritance.Datacontract\Backboen.WidgetInheritance.Datacontract.csproj", "{C90A0015-F9E4-4AC8-88EB-7574F9D286D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backbone.WidgetInheritance.UI", "Backbone.WidgetInheritance.UI\Backbone.WidgetInheritance.UI.csproj", "{D656C3F5-1342-4014-8BB9-39CE96413782}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E858F33-070D-4BFA-994C-D1296B3FC601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E858F33-070D-4BFA-994C-D1296B3FC601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E858F33-070D-4BFA-994C-D1296B3FC601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E858F33-070D-4BFA-994C-D1296B3FC601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A82434E0-8CB6-4AFC-8B50-BCBFEDD4F16A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A82434E0-8CB6-4AFC-8B50-BCBFEDD4F16A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A82434E0-8CB6-4AFC-8B50-BCBFEDD4F16A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A82434E0-8CB6-4AFC-8B50-BCBFEDD4F16A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03138A50-1E60-422C-A8EC-E257EC15D33A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03138A50-1E60-422C-A8EC-E257EC15D33A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03138A50-1E60-422C-A8EC-E257EC15D33A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03138A50-1E60-422C-A8EC-E257EC15D33A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C90A0015-F9E4-4AC8-88EB-7574F9D286D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C90A0015-F9E4-4AC8-88EB-7574F9D286D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C90A0015-F9E4-4AC8-88EB-7574F9D286D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C90A0015-F9E4-4AC8-88EB-7574F9D286D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D656C3F5-1342-4014-8BB9-39CE96413782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D656C3F5-1342-4014-8BB9-39CE96413782}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D656C3F5-1342-4014-8BB9-39CE96413782}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D656C3F5-1342-4014-8BB9-39CE96413782}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C90A0015-F9E4-4AC8-88EB-7574F9D286D7} = {E5D075BF-48E4-4D4C-BDF7-11DB0B7D6606}
+		{D656C3F5-1342-4014-8BB9-39CE96413782} = {E5D075BF-48E4-4D4C-BDF7-11DB0B7D6606}
+		{9E858F33-070D-4BFA-994C-D1296B3FC601} = {853EFB4C-C274-4423-86BA-E15051FE9FB1}
+		{A82434E0-8CB6-4AFC-8B50-BCBFEDD4F16A} = {853EFB4C-C274-4423-86BA-E15051FE9FB1}
+		{03138A50-1E60-422C-A8EC-E257EC15D33A} = {853EFB4C-C274-4423-86BA-E15051FE9FB1}
+	EndGlobalSection
+EndGlobal
