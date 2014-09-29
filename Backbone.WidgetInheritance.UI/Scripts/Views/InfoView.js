@@ -16,6 +16,7 @@
         initialize: function () {
 
             //bind general info events here..
+            _.extend(this, Backbone.Events);
             this.bindEvents();
             this.initializeChild();
         },
@@ -38,6 +39,13 @@
 
         bindEvents: function () {
 
+            this.on('edit', function (data) {
+                this.editView();
+            });
+
+            this.on('delete', function (data) {
+                this.deleteView();
+            });
         },
 
         getDatFromServer: function (viewName) {
@@ -46,11 +54,21 @@
         },
 
         editInfo: function () {
-
+            this.trigger("edit");
         },
-        
-        deleteInfo: function () {
 
+        deleteInfo: function () {
+            this.trigger("delete");
+        },
+
+        deleteView: function () {
+            //this.$el.slideUp(1000);
+            //this.$el.html('');
+            this.remove();
+        },
+
+        editView: function () {
+            console.log(++window.WI.testCount + '. ' + this.templatePath);
         }
     });
 

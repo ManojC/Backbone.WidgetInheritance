@@ -133,3 +133,7 @@ textarea.parsley-error {
 .mbs {
     margin-bottom: 10px;
 }
+
+.mbns {
+    margin-bottom: -10px;
+}

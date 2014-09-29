@@ -16,11 +16,8 @@
             this.bindChildEvents();
         },
 
-        events: {
-            'click #btnSaveGeneralInfo': 'saveInfo'
-        },
-
         bindChildEvents: function () {
+            this.events['click #btnSaveGeneralInfo'] = 'saveInfo';
             console.log(++window.WI.testCount + '. overridden!');
             var that = this;
             $.ajax({
