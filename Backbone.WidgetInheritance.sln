@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backboen.WidgetInheritance.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backboen.WidgetInheritance.Model", "Backboen.WidgetInheritance.Model\Backboen.WidgetInheritance.Model.csproj", "{03138A50-1E60-422C-A8EC-E257EC15D33A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backboen.WidgetInheritance.Datacontract", "Backboen.WidgetInheritance.Datacontract\Backboen.WidgetInheritance.Datacontract.csproj", "{C90A0015-F9E4-4AC8-88EB-7574F9D286D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backboen.WidgetInheritance.DataContract", "Backboen.WidgetInheritance.Datacontract\Backboen.WidgetInheritance.DataContract.csproj", "{C90A0015-F9E4-4AC8-88EB-7574F9D286D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backbone.WidgetInheritance.UI", "Backbone.WidgetInheritance.UI\Backbone.WidgetInheritance.UI.csproj", "{D656C3F5-1342-4014-8BB9-39CE96413782}"
 EndProject

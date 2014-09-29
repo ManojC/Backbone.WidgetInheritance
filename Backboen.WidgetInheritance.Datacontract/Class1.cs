@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Backboen.WidgetInheritance.Datacontract
+namespace Backboen.WidgetInheritance.DataContract
 {
     public class Class1
     {
