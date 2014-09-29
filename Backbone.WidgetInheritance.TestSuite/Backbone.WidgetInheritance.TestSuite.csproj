@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>44d288d8-0d85-40f8-a835-6392385cfb17</ProjectGuid>
+    <ProjectGuid>{F3549126-AA2F-429A-BF65-FC95A23C9AB3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Backbone.WidgetInheritance.TestSuite</RootNamespace>
