@@ -23,26 +23,34 @@
         //this can be overridden by child view for custom event handling..
         initializeChild: function () { },
 
-        render: function () {
+        render: function (viewName, successCallback) {
 
-            var data = this.getDatFromServer();
+            var data = this.getDatFromServer(viewName);
             var html = Handlebars.compile(this.template)(data);
             this.$el.html(html);
+            successCallback();
         },
 
         events: {
-
+            'click .btnInfoEdit': 'editInfo',
+            'click .btnInfoSave': 'deleteInfo'
         },
 
         bindEvents: function () {
-            var that = this;
-            $.get(this.templatePath, function (template) {
-                that.template = template;
-            });
+
+        },
+
+        getDatFromServer: function (viewName) {
+            console.log(++window.WI.testCount + '. ' + viewName);
+            return null;
+        },
+
+        editInfo: function () {
+
         },
         
-        getDatFromServer: function() {
-            
+        deleteInfo: function () {
+
         }
     });
 

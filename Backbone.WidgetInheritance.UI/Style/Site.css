@@ -11,6 +11,10 @@
     margin-top: 20px;
 }
 
+.mts {
+    margin-top: 10px;
+}
+
 .mll {
     margin-left: 20px;
 }
@@ -108,4 +112,24 @@ textarea.parsley-error {
 
 .font-size-m {
     font-size: 16px;
+}
+
+.ba {
+    border: black thin solid;
+}
+
+.bat {
+    border: black thin solid;
+}
+
+.pas {
+    padding: 5px;
+}
+
+.bbn {
+    border-bottom: none;
+}
+
+.mbs {
+    margin-bottom: 10px;
 }
