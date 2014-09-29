@@ -68,6 +68,7 @@
     <Content Include="Scripts\Models\InfoModel.js" />
     <Content Include="Scripts\Models\UserDetailsModel.js" />
     <Content Include="Scripts\Models\UserListingModel.js" />
+    <Content Include="Scripts\Utils\TemplateMappings.js" />
     <Content Include="Scripts\Views\GeneralInfoView.js" />
     <Content Include="Scripts\Views\AddressInfoView.js" />
     <Content Include="Scripts\Views\EducationInfoView.js" />
@@ -79,7 +80,7 @@
     <Content Include="Templates\AddressInfo.html" />
     <Content Include="Templates\EducationInfo.html" />
     <Content Include="Templates\GeneralInfo.html" />
-    <Content Include="Templates\Info.html" />
+    <Content Include="Templates\details.html" />
     <Content Include="Templates\UserDetails.html" />
     <Content Include="Templates\UserListing.html" />
     <Content Include="Web.config" />
@@ -89,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Style\bootstrap.css.map" />
+    <Content Include="Scripts\Libraries\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
