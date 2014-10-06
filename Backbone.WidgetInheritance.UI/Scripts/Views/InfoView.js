@@ -1,4 +1,4 @@
-﻿(function($, window, undefined) {
+﻿(function ($, window, undefined) {
 
     window.WI = window.WI || {};
     window.WI.Views = window.WI.Views || {};
@@ -12,7 +12,7 @@
 
         template: '',
 
-        initialize: function() {
+        initialize: function () {
 
             //bind events here..
             this.bindEvents();
@@ -20,10 +20,10 @@
         },
 
         //this can be overridden by child view for custom event handling..
-        initializeChild: function() {
+        initializeChild: function () {
         },
 
-        render: function(viewName, successCallback) {
+        render: function (viewName, successCallback) {
 
             var data = this.getDatFromServer(viewName);
             var html = Handlebars.compile(this.template)(data);
@@ -38,7 +38,7 @@
             'click .titleView': 'triggerSlide'
         },
 
-        bindEvents: function() {
+        bindEvents: function () {
 
             _.extend(this, Backbone.Events);
 
@@ -53,32 +53,32 @@
             this.listenTo(this, 'titleClick', this.titleClick);
         },
 
-        getDatFromServer: function(viewName) {
+        getDatFromServer: function (viewName) {
             console.log(++window.WI.testCount + '. ' + viewName);
             return null;
         },
 
-        triggerEdit: function() {
+        triggerEdit: function () {
             this.trigger("edit");
             return false;
         },
 
-        triggerDelete: function() {
+        triggerDelete: function () {
             this.trigger("delete");
             return false;
         },
 
-        triggerSave: function() {
+        triggerSave: function () {
             this.trigger("save");
             return false;
         },
 
-        triggerSlide: function() {
+        triggerSlide: function () {
             this.trigger("titleClick");
             return false;
         },
 
-        titleClick: function() {
+        titleClick: function () {
             $('.detailsView', this.$el).slideToggle(500);
             this.$el.find('.titleView').toggleClass('bbn');
         }
