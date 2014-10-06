@@ -17,7 +17,6 @@
         },
 
         bindChildEvents: function () {
-            this.events['click #btnSaveGeneralInfo'] = 'saveInfo';
             console.log(++window.WI.testCount + '. overridden!');
             var that = this;
             $.ajax({
@@ -36,8 +35,18 @@
 
         },
 
-        saveInfo: function () {
-            console.log(++window.WI.testCount + '. general info saved!');
+        saveView: function () {
+            $('.form-control', this.$el).val('');
+        },
+
+        deleteView: function (e) {
+            this.off();
+            this.$el.html('');
+        },
+
+        editView: function (e) {
+
+            $('.form-control', this.$el).val('general');
         }
     });
 
