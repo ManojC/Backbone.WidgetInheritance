@@ -11,9 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backboen.WidgetInheritance.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backboen.WidgetInheritance.Model", "Backboen.WidgetInheritance.Model\Backboen.WidgetInheritance.Model.csproj", "{03138A50-1E60-422C-A8EC-E257EC15D33A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backboen.WidgetInheritance.Datacontract", "Backboen.WidgetInheritance.Datacontract\Backboen.WidgetInheritance.Datacontract.csproj", "{C90A0015-F9E4-4AC8-88EB-7574F9D286D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backboen.WidgetInheritance.DataContract", "Backboen.WidgetInheritance.Datacontract\Backboen.WidgetInheritance.DataContract.csproj", "{C90A0015-F9E4-4AC8-88EB-7574F9D286D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backbone.WidgetInheritance.UI", "Backbone.WidgetInheritance.UI\Backbone.WidgetInheritance.UI.csproj", "{D656C3F5-1342-4014-8BB9-39CE96413782}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Test Suite", "3. Test Suite", "{9BF31101-35DA-4B90-A5B8-1CF87FC7D5C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backbone.WidgetInheritance.TestSuite", "Backbone.WidgetInheritance.TestSuite\Backbone.WidgetInheritance.TestSuite.csproj", "{F3549126-AA2F-429A-BF65-FC95A23C9AB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,10 @@ Global
 		{D656C3F5-1342-4014-8BB9-39CE96413782}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D656C3F5-1342-4014-8BB9-39CE96413782}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D656C3F5-1342-4014-8BB9-39CE96413782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3549126-AA2F-429A-BF65-FC95A23C9AB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3549126-AA2F-429A-BF65-FC95A23C9AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3549126-AA2F-429A-BF65-FC95A23C9AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3549126-AA2F-429A-BF65-FC95A23C9AB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,5 +59,6 @@ Global
 		{9E858F33-070D-4BFA-994C-D1296B3FC601} = {853EFB4C-C274-4423-86BA-E15051FE9FB1}
 		{A82434E0-8CB6-4AFC-8B50-BCBFEDD4F16A} = {853EFB4C-C274-4423-86BA-E15051FE9FB1}
 		{03138A50-1E60-422C-A8EC-E257EC15D33A} = {853EFB4C-C274-4423-86BA-E15051FE9FB1}
+		{F3549126-AA2F-429A-BF65-FC95A23C9AB3} = {9BF31101-35DA-4B90-A5B8-1CF87FC7D5C9}
 	EndGlobalSection
 EndGlobal

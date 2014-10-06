@@ -7,8 +7,8 @@
     <ProjectGuid>{C90A0015-F9E4-4AC8-88EB-7574F9D286D7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Backboen.WidgetInheritance.Datacontract</RootNamespace>
-    <AssemblyName>Backboen.WidgetInheritance.Datacontract</AssemblyName>
+    <RootNamespace>Backboen.WidgetInheritance.DataContract</RootNamespace>
+    <AssemblyName>Backboen.WidgetInheritance.DataContract</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

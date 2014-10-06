@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pages\Home.html" />
+    <Content Include="Scripts\AppStart\AppStart.js" />
     <Content Include="Scripts\Libraries\backbone-min.js" />
     <Content Include="Scripts\Libraries\handlebars-1.3.js" />
     <Content Include="Scripts\Libraries\jquery-1.10.2.min.js" />
@@ -68,6 +69,7 @@
     <Content Include="Scripts\Models\InfoModel.js" />
     <Content Include="Scripts\Models\UserDetailsModel.js" />
     <Content Include="Scripts\Models\UserListingModel.js" />
+    <Content Include="Scripts\Utils\TemplateMappings.js" />
     <Content Include="Scripts\Views\GeneralInfoView.js" />
     <Content Include="Scripts\Views\AddressInfoView.js" />
     <Content Include="Scripts\Views\EducationInfoView.js" />
@@ -79,7 +81,7 @@
     <Content Include="Templates\AddressInfo.html" />
     <Content Include="Templates\EducationInfo.html" />
     <Content Include="Templates\GeneralInfo.html" />
-    <Content Include="Templates\Info.html" />
+    <Content Include="Templates\Details.html" />
     <Content Include="Templates\UserDetails.html" />
     <Content Include="Templates\UserListing.html" />
     <Content Include="Web.config" />
@@ -89,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Style\bootstrap.css.map" />
+    <Content Include="Scripts\Libraries\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
