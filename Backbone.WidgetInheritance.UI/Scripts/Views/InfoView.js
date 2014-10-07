@@ -39,25 +39,28 @@
         bindEvents: function () {
 
             this.on({
-                'edit': this.editView,
-                'delete': this.deleteView,
-                'save': this.saveView,
-                'titleClick': this.titleClick,
-                'fetchTemplate': this.fetchTemplate
+                'edit': this._editView,
+                'delete': this._deleteView,
+                'save': this._saveView,
+                'titleClick': this._titleClick,
+                'fetchTemplate': this._fetchTemplate,
+                'bindChildEvents': this._bindChildEvents
             });
 
-            if (this.eventListner && typeof (this.eventListner) == "function")
-                this.eventListner();
-            _.extend(this.events, this.childEvents || {});
+            if (this._initializeChild && typeof (this._initializeChild) == "function")
+                this._initializeChild();
             this.trigger("fetchTemplate");
         },
 
         //event handler functions to be overridden by chikd view.
-        editView: function () { },
-        deleteView: function () { },
-        saveView: function () { },
-        titleClick: function () { },
-        fetchTemplate: function () { },
+        _editView: function () { },
+        _deleteView: function () { },
+        _saveView: function () { },
+        _titleClick: function () { },
+        _fetchTemplate: function () { },
+        _bindChildEvents: function () {
+            _.extend(this.events, this.childEvents || {});
+        },
 
         destroy: function () {
             this.off();

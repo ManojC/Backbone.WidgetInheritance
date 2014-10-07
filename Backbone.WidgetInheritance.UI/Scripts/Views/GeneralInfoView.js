@@ -16,17 +16,18 @@
             this.bindChildEvents();
         },
 
-        eventListner: function () {
+        _initializeChild: function () {
             this.childEvents = {
-                'click input.form-control':''
+                'click input.form-control': '_titleClick'
             }
+            this.trigger('bindChildEvents');
         },
 
-        saveView: function () {
+        _saveView: function () {
             $('.form-control', this.$el).val('');
         },
 
-        deleteView: function (e) {
+        _deleteView: function (e) {
             var self = this;
             this.$el.slideUp(500, function () {
                 self.$el.html('');
@@ -34,17 +35,17 @@
             });
         },
 
-        editView: function (e) {
+        _editView: function (e) {
 
             $('.form-control', this.$el).val('general');
         },
 
-        titleClick: function () {
+        _titleClick: function () {
             $('.detailsView', this.$el).unbind('slideToggle').slideToggle(500);
             this.$el.find('.titleView').toggleClass('bbn');
         },
         
-        fetchTemplate: function () {
+        _fetchTemplate: function () {
             console.log(++window.WI.testCount + '. overridden!');
             var that = this;
             $.ajax({

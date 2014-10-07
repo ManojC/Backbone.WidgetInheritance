@@ -16,19 +16,22 @@
             this.bindChildEvents();
         },
 
-        eventListner: function () {
-
+        _initializeChild: function () {
+            this.childEvents = {
+                'click input.form-control': ''
+            }
+            this.trigger('bindChildEvents');
         },
 
         getDatFromServer: function () {
 
         },
 
-        saveView: function () {
+        _saveView: function () {
             $('.form-control', this.$el).val('');
         },
 
-        deleteView: function () {
+        _deleteView: function () {
             var self = this;
             this.$el.slideUp(500, function () {
                 self.$el.html('');
@@ -36,17 +39,17 @@
             });
         },
 
-        editView: function () {
+        _editView: function () {
 
             $('.form-control', this.$el).val('educational');
         },
 
-        titleClick: function () {
+        _titleClick: function () {
             $('.detailsView', this.$el).unbind('slideToggle').slideToggle(500);
             this.$el.find('.titleView').toggleClass('bbn');
         },
 
-        fetchTemplate: function () {
+        _fetchTemplate: function () {
             console.log(++window.WI.testCount + '. overridden!');
             var that = this;
             $.ajax({
