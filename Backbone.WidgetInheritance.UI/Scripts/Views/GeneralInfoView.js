@@ -17,13 +17,9 @@
         },
 
         eventListner: function () {
-            this.on({
-                'edit': this.editView,
-                'delete': this.deleteView,
-                'save': this.saveView,
-                'titleClick': this.titleClick,
-                'fetchTemplate': this.fetchTemplate
-            });
+            this.childEvents = {
+                'click input.form-control':''
+            }
         },
 
         saveView: function () {
@@ -43,6 +39,11 @@
             $('.form-control', this.$el).val('general');
         },
 
+        titleClick: function () {
+            $('.detailsView', this.$el).unbind('slideToggle').slideToggle(500);
+            this.$el.find('.titleView').toggleClass('bbn');
+        },
+        
         fetchTemplate: function () {
             console.log(++window.WI.testCount + '. overridden!');
             var that = this;

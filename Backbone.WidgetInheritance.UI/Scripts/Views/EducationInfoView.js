@@ -17,13 +17,7 @@
         },
 
         eventListner: function () {
-            this.on({
-                'edit': this.editView,
-                'delete': this.deleteView,
-                'save': this.saveView,
-                'titleClick': this.titleClick,
-                'fetchTemplate': this.fetchTemplate
-            });
+
         },
 
         getDatFromServer: function () {
@@ -45,6 +39,11 @@
         editView: function () {
 
             $('.form-control', this.$el).val('educational');
+        },
+
+        titleClick: function () {
+            $('.detailsView', this.$el).unbind('slideToggle').slideToggle(500);
+            this.$el.find('.titleView').toggleClass('bbn');
         },
 
         fetchTemplate: function () {

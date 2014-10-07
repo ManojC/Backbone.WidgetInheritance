@@ -16,6 +16,11 @@
 
             //bind events here..
             this.bindEvents();
+
+            //add child events and extend events object
+            if (this._bindChildEvents && typeof (this._bindChildEvents) == "function")
+                this._bindChildEvents();
+            _.extend(this.events, this.childEvents || {});
         },
 
         render: function (viewName, successCallback) {
@@ -31,21 +36,32 @@
             'click .titleView': function () { this.trigger("titleClick"); return false; }
         },
 
+        bindEvents: function () {
+
+            this.on({
+                'edit': this.editView,
+                'delete': this.deleteView,
+                'save': this.saveView,
+                'titleClick': this.titleClick,
+                'fetchTemplate': this.fetchTemplate
+            });
+
+            if (this.eventListner && typeof (this.eventListner) == "function")
+                this.eventListner();
+            _.extend(this.events, this.childEvents || {});
+            this.trigger("fetchTemplate");
+        },
+
+        //event handler functions to be overridden by chikd view.
+        editView: function () { },
+        deleteView: function () { },
+        saveView: function () { },
+        titleClick: function () { },
+        fetchTemplate: function () { },
+
         destroy: function () {
             this.off();
             this.stopListening();
-        },
-
-        bindEvents: function () {
-            if (this.eventListner && typeof (this.eventListner) == "function") {
-                this.eventListner();
-                this.trigger("fetchTemplate");
-            }
-        },
-
-        titleClick: function () {
-            $('.detailsView', this.$el).unbind('slideToggle').slideToggle(500);
-            this.$el.find('.titleView').toggleClass('bbn');
         }
     });
 
