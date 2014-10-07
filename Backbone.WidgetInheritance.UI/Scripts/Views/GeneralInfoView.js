@@ -16,7 +16,29 @@
             this.bindChildEvents();
         },
 
-        bindChildEvents: function () {
+        eventListner: function() {
+            this.stopListening();
+            this.listenTo(this, 'edit', this.editView);
+            this.listenTo(this, 'delete', this.deleteView);
+            this.listenTo(this, 'save', this.saveView);
+            this.listenTo(this, 'titleClick', this.titleClick);
+            this.listenTo(this, 'fetchTemplate', this.fetchTemplate);
+        },
+
+        saveView: function () {
+            $('.form-control', this.$el).val('');
+        },
+
+        deleteView: function (e) {
+            this.$el.html('');
+        },
+
+        editView: function (e) {
+
+            $('.form-control', this.$el).val('general');
+        },
+
+        fetchTemplate: function () {
             console.log(++window.WI.testCount + '. overridden!');
             var that = this;
             $.ajax({
@@ -29,24 +51,6 @@
                     console.log(++window.WI.testCount + '. callback for general info template completed!');
                 }
             });
-        },
-
-        getDatFromServer: function () {
-
-        },
-
-        saveView: function () {
-            $('.form-control', this.$el).val('');
-        },
-
-        deleteView: function (e) {
-            this.off();
-            this.$el.html('');
-        },
-
-        editView: function (e) {
-
-            $('.form-control', this.$el).val('general');
         }
     });
 

@@ -37,22 +37,25 @@
         },
 
         renderGeneralInfoView: function () {
-            var generalInfoView = new window.WI.Views.GeneralInfoView();
-            generalInfoView.render('GeneralInfoView', function () {
+            if (!this.generalInfoView)
+                this.generalInfoView = new window.WI.Views.GeneralInfoView();
+            this.generalInfoView.render('GeneralInfoView', function () {
                 console.log(++window.WI.testCount + '. success callback for general info render');
             });
         },
 
         renderEducationalInfoView: function () {
-            var educationInfoView = new window.WI.Views.EducationInfoView();
-            educationInfoView.render('EducationInfoView', function () {
+            if (!this.educationInfoView)
+                this.educationInfoView = new window.WI.Views.EducationInfoView();
+            this.educationInfoView.render('EducationInfoView', function () {
                 console.log(++window.WI.testCount + '. success callback for educational info render');
             });
         },
 
         renderAddressInfoView: function () {
-            var addressInfoView = new window.WI.Views.AddressInfoView();
-            addressInfoView.render('AddressInfoView', function () {
+            if (!this.addressInfoView)
+                this.addressInfoView = new window.WI.Views.AddressInfoView();
+            this.addressInfoView.render('AddressInfoView', function () {
                 console.log(++window.WI.testCount + '. success callback for address info render');
             });
         }

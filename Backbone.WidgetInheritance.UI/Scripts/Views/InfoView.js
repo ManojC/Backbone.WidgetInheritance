@@ -16,70 +16,35 @@
 
             //bind events here..
             this.bindEvents();
-            this.initializeChild();
-        },
-
-        //this can be overridden by child view for custom event handling..
-        initializeChild: function () {
         },
 
         render: function (viewName, successCallback) {
-
-            var data = this.getDatFromServer(viewName);
-            var html = Handlebars.compile(this.template)(data);
+            var html = Handlebars.compile(this.template)(null);
             this.$el.html(html);
             successCallback();
         },
 
         events: {
-            'click .btnInfoEdit': 'triggerEdit',
-            'click .btnInfoSave': 'triggerDelete',
-            'click .btnSaveInfo': 'triggerSave',
-            'click .titleView': 'triggerSlide'
+            'click .btnInfoEdit': function () { this.trigger("edit"); return false; },
+            'click .btnInfoDelete': function () { this.trigger("delete"); return false; },
+            'click .btnSaveInfo': function () { this.trigger("save"); return false; },
+            'click .titleView': function () { this.trigger("titleClick"); return false; }
+        },
+
+        destroy: function () {
+            this.off();
+            this.stopListening();
         },
 
         bindEvents: function () {
-
-            _.extend(this, Backbone.Events);
-
-            this.on('edit');
-            this.on('delete');
-            this.on('save');
-            this.on('titleClick');
-
-            this.listenTo(this, 'edit', this.editView);
-            this.listenTo(this, 'delete', this.deleteView);
-            this.listenTo(this, 'save', this.saveView);
-            this.listenTo(this, 'titleClick', this.titleClick);
-        },
-
-        getDatFromServer: function (viewName) {
-            console.log(++window.WI.testCount + '. ' + viewName);
-            return null;
-        },
-
-        triggerEdit: function () {
-            this.trigger("edit");
-            return false;
-        },
-
-        triggerDelete: function () {
-            this.trigger("delete");
-            return false;
-        },
-
-        triggerSave: function () {
-            this.trigger("save");
-            return false;
-        },
-
-        triggerSlide: function () {
-            this.trigger("titleClick");
-            return false;
+            if (this.eventListner && typeof (this.eventListner) == "function") {
+                this.eventListner();
+                this.trigger("fetchTemplate");
+            }
         },
 
         titleClick: function () {
-            $('.detailsView', this.$el).slideToggle(500);
+            $('.detailsView', this.$el).unbind('slideToggle').slideToggle(500);
             this.$el.find('.titleView').toggleClass('bbn');
         }
     });

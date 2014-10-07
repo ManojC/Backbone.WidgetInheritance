@@ -16,19 +16,13 @@
             this.bindChildEvents();
         },
 
-        bindChildEvents: function () {
-            console.log(++window.WI.testCount + '. overridden!');
-            var that = this;
-            $.ajax({
-                url: this.templatePath,
-                async: false,
-                type: 'GET',
-                success: function (template) {
-                    that.template = template;
-                    //that.$el.html(template);
-                    console.log(++window.WI.testCount + '. callback for address info template completed!');
-                }
-            });
+        eventListner: function () {
+
+            this.listenTo(this, 'edit', this.editView);
+            this.listenTo(this, 'delete', this.deleteView);
+            this.listenTo(this, 'save', this.saveView);
+            this.listenTo(this, 'titleClick', this.titleClick);
+            this.listenTo(this, 'fetchTemplate', this.fetchTemplate);
         },
 
         getDatFromServer: function () {
@@ -47,6 +41,21 @@
         editView: function () {
 
             $('.form-control', this.$el).val('Address');
+        },
+
+        fetchTemplate: function () {
+            console.log(++window.WI.testCount + '. overridden!');
+            var that = this;
+            $.ajax({
+                url: this.templatePath,
+                async: false,
+                type: 'GET',
+                success: function (template) {
+                    that.template = template;
+                    //that.$el.html(template);
+                    console.log(++window.WI.testCount + '. callback for general info template completed!');
+                }
+            });
         }
     });
 
