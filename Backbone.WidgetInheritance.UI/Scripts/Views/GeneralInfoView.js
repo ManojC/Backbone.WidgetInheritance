@@ -16,13 +16,14 @@
             this.bindChildEvents();
         },
 
-        eventListner: function() {
-            this.stopListening();
-            this.listenTo(this, 'edit', this.editView);
-            this.listenTo(this, 'delete', this.deleteView);
-            this.listenTo(this, 'save', this.saveView);
-            this.listenTo(this, 'titleClick', this.titleClick);
-            this.listenTo(this, 'fetchTemplate', this.fetchTemplate);
+        eventListner: function () {
+            this.on({
+                'edit': this.editView,
+                'delete': this.deleteView,
+                'save': this.saveView,
+                'titleClick': this.titleClick,
+                'fetchTemplate': this.fetchTemplate
+            });
         },
 
         saveView: function () {
@@ -30,7 +31,11 @@
         },
 
         deleteView: function (e) {
-            this.$el.html('');
+            var self = this;
+            this.$el.slideUp(500, function () {
+                self.$el.html('');
+                self.$el.show();
+            });
         },
 
         editView: function (e) {
