@@ -34,7 +34,6 @@
         },
 
         deleteView: function () {
-            this.off();
             this.$el.html('');
         },
 
