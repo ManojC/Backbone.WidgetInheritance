@@ -9,23 +9,24 @@
         //default value for element. Expected to be overridden by child view.
         el: '#educationalInfo',
 
-        templatePath: '../Templates/EducationInfo.html',
+        templateId: '#educationalInfoSection',
 
         //this can be overridden by child view for custom event handling..
-        initializeChild: function () {
-            this.bindChildEvents();
-        },
-
         _initializeChild: function () {
+            this._bindChildEvents();
+        },
+
+        _bindChildEvents: function () {
             this.childEvents = {
-                'click input.form-control': ''
-            }
+                'click input.form-control': '_titleClick'
+            };
             this.trigger('bindChildEvents');
+            this.on({
+                'doSomething': this._doSomething
+            });
         },
 
-        getDatFromServer: function () {
-
-        },
+        getDatFromServer: function () { },
 
         _saveView: function () {
             $('.form-control', this.$el).val('');
@@ -50,18 +51,11 @@
         },
 
         _fetchTemplate: function () {
-            console.log(++window.WI.testCount + '. overridden!');
-            var that = this;
-            $.ajax({
-                url: this.templatePath,
-                async: false,
-                type: 'GET',
-                success: function (template) {
-                    that.template = template;
-                    //that.$el.html(template);
-                    console.log(++window.WI.testCount + '. callback for general info template completed!');
-                }
-            });
+            this.template = $(this.templateId).html();
+        },
+
+        _doSomething: function () {
+            console.log('doing something!');
         }
     });
 

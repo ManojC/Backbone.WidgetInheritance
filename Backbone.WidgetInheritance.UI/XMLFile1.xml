@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="72">
+  <server artifactsdir="artifacts" siteUrl="http://hfl-build.pune.tavisca.com:8153" secureSiteUrl="https://hfl-build.travelnxt.com" commandRepositoryLocation="custom" serverId="53ea0af4-e139-4abb-ba2d-88a60fb0e30d">
+    <security>
+      <ldap uri="ldap://pune.tavisca.com" managerDn="PUNE\hfl-cd" encryptedManagerPassword="lLHuq1jbo/3W++V4LrV3SA==" searchFilter="(sAMAccountName={0})">
+        <bases>
+          <base value="CN=Users,DC=pune,DC=tavisca,DC=com" />
+        </bases>
+      </ldap>
+      <passwordFile path=".\config\users.txt" />
+      <roles>
+        <role name="Developer">
+          <users>
+            <user>aluthra</user>
+            <user>amar</user>
+            <user>bhagyashree</user>
+            <user>mchalode</user>
+            <user>nikhil</user>
+            <user>sbohra</user>
+            <user>sdeshmukh</user>
+            <user>ytokas</user>
+            <user>zirfan</user>
+          </users>
+        </role>
+      </roles>
+      <admins>
+        <user>mchalode</user>
+        <user>nikhil</user>
+        <user>ytokas</user>
+        <user>sa</user>
+        <user>hfl-cd</user>
+        <user>amar</user>
+      </admins>
+    </security>
+    <mailhost hostname="smtp.gmail.com" port="465" username="buildmaster@tavisca.com" encryptedPassword="O5TtFvVRsWzL77dj8DN7hA==" tls="true" from="buildmaster@tavisca.com" admin="hfl@tavisca.com" />
+  </server>
+  <pipelines group="HFLDev">
+    <authorization>
+      <view>
+        <user>aluthra</user>
+        <user>sbohra</user>
+        <user>sdeshmukh</user>
+        <user>yrathore</user>
+        <user>zirfan</user>
+      </view>
+      <admins>
+        <user>amar</user>
+        <user>mchalode</user>
+        <user>nikhil</user>
+        <user>ytokas</user>
+      </admins>
+    </authorization>
+    <pipeline name="hfl-local" template="wen_app">
+      <params>
+        <param name="REPOSITORY_URL">https://hfl-cd:zaq1ZAQ!@github.com/TaviscaSolutions/hfl.git</param>
+        <param name="BRANCH">develop</param>
+        <param name="UNIT_TEST_FILE">unitTest</param>
+        <param name="INFRA_TEST_FILE">infraTest</param>
+        <param name="TEST">${test}</param>
+      </params>
+      <trackingtool link="http://tracker.tavisca.com/browse/${ID}" regex="HFL-[0-9]+" />
+      <environmentvariables>
+        <variable name="test">
+          <value>This is a test value.</value>
+        </variable>
+      </environmentvariables>
+      <materials>
+        <git url="#{REPOSITORY_URL}" branch="#{BRANCH}" materialName="GITHUB" />
+      </materials>
+    </pipeline>
+  </pipelines>
+  <pipelines group="HFLStage">
+    <pipeline name="hfl-stage">
+      <params>
+        <param name="REPOSITORY_URL">https://hfl-cd:zaq1ZAQ!@github.com/TaviscaSolutions/hfl.git</param>
+        <param name="BRANCH1">master</param>
+        <param name="UNIT_TEST_FILE">unitTest</param>
+        <param name="INFRA_TEST_FILE">infraTest</param>
+        <param name="TEST">${test}</param>
+        <param name="BRANCH" />
+      </params>
+      <materials>
+        <git url="#{REPOSITORY_URL}" branch="#{BRANCH}" materialName="GITHUB" />
+      </materials>
+      <stage name="compile">
+        <jobs>
+          <job name="compileTheCode">
+            <tasks>
+              <exec command="C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe">
+                <arg>/m:2</arg>
+                <arg>/v:minimal</arg>
+                <arg>/p:Configuration=Stage</arg>
+                <arg>/t:Clean</arg>
+                <arg>/t:Build</arg>
+                <arg>.\src\HuntersForLuck.All.sln</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="createAndDeployPackage">
+        <jobs>
+          <job name="createAndDeployPackage">
+            <tasks>
+              <exec command="xcopy src\Website\Web.Stage.config src\Website\Web.config">
+                <arg>/Y</arg>
+                <arg>/I</arg>
+                <arg>/C</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="xcopy src\Website\Scripts\Configuration\stage-configuration.js src\Website\Scripts\configuration.js">
+                <arg>/Y</arg>
+                <arg>/I</arg>
+                <arg>/C</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe">
+                <arg>/m:2</arg>
+                <arg>/v:minimal</arg>
+                <arg>/P:Configuration=Release</arg>
+                <arg>/t:Rebuild</arg>
+                <arg>/p:SkipInvalidConfigurations=true</arg>
+                <arg>/P:DeployOnBuild=True</arg>
+                <arg>/P:DeployTarget=MSDeployPublish</arg>
+                <arg>/p:MSDeployPublishMethod=RemoteAgent</arg>
+                <arg>/P:MsDeployServiceUrl=http://hfl.appyoda.io</arg>
+                <arg>/P:DeployIISAppPath=stage-hfl</arg>
+                <arg>/P:AllowUntrustedCertificate=True</arg>
+                <arg>/P:CreatePackageOnPublish=True</arg>
+                <arg>/P:UserName=Administrator</arg>
+                <arg>/P:Password=f34fyf6@ss</arg>
+                <arg>src\Website\Website.csproj</arg>
+                <arg>/p:OutPath=D:\Test</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </pipelines>
+  <pipelines group="HFLProd">
+    <pipeline name="hfl-prod">
+      <params>
+        <param name="REPOSITORY_URL">https://hfl-cd:zaq1ZAQ!@github.com/TaviscaSolutions/hfl.git</param>
+        <param name="BRANCH">master</param>
+      </params>
+      <materials>
+        <git url="#{REPOSITORY_URL}" branch="#{BRANCH}" autoUpdate="false" materialName="GITHUB" />
+      </materials>
+      <stage name="compile">
+        <jobs>
+          <job name="compileTheCode">
+            <tasks>
+              <exec command="xcopy src\Website\Web.Prod.config src\Website\Web.config">
+                <arg>/Y</arg>
+                <arg>/I</arg>
+                <arg>/C</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe">
+                <arg>/m:2</arg>
+                <arg>/v:minimal</arg>
+                <arg>/p:Configuration=Prod</arg>
+                <arg>/t:Clean</arg>
+                <arg>/t:Build</arg>
+                <arg>.\src\HuntersForLuck.All.sln</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="createAndDeployPackage">
+        <jobs>
+          <job name="createAndDeployPackage">
+            <tasks>
+              <exec command="xcopy src\Website\Web.Prod.config src\Website\Web.config">
+                <arg>/Y</arg>
+                <arg>/I</arg>
+                <arg>/C</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="xcopy src\Website\Scripts\Configuration\prod-configuration.js src\Website\Scripts\configuration.js">
+                <arg>/Y</arg>
+                <arg>/I</arg>
+                <arg>/C</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe">
+                <arg>/m:2</arg>
+                <arg>/v:minimal</arg>
+                <arg>/P:Configuration=Release</arg>
+                <arg>/t:Rebuild</arg>
+                <arg>/p:SkipInvalidConfigurations=true</arg>
+                <arg>/P:DeployOnBuild=True</arg>
+                <arg>/P:DeployTarget=MSDeployPublish</arg>
+                <arg>/p:MSDeployPublishMethod=RemoteAgent</arg>
+                <arg>/P:MsDeployServiceUrl=http://hfl.appyoda.io</arg>
+                <arg>/P:DeployIISAppPath=Default Web Site</arg>
+                <arg>/P:AllowUntrustedCertificate=True</arg>
+                <arg>/P:CreatePackageOnPublish=True</arg>
+                <arg>/P:UserName=Administrator</arg>
+                <arg>/P:Password=f34fyf6@ss</arg>
+                <arg>src\Website\Website.csproj</arg>
+                <arg>/p:OutPath=D:\Test</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </pipelines>
+  <templates>
+    <pipeline name="wen_app">
+      <stage name="compile">
+        <jobs>
+          <job name="compileTheCode">
+            <tasks>
+              <exec command="C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe">
+                <arg>/m:2</arg>
+                <arg>/v:minimal</arg>
+                <arg>/p:Configuration=Release</arg>
+                <arg>/t:Clean</arg>
+                <arg>/t:Build</arg>
+                <arg>.\src\HuntersForLuck.All.sln</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="cmd">
+                <arg>/c</arg>
+                <arg>echo</arg>
+                <arg>hello %USERNAME% %GO_PIPELINE_LABEL% #{TEST}</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="src/UnitTests/bin/Release/*" dest="tests/unitTests" />
+              <artifact src="src/Tavisca.Common.Infrastructure.Tests/bin/Release/*" dest="tests/infraTests" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="runUnitTests" fetchMaterials="false">
+        <jobs>
+          <job name="runUnitTests">
+            <environmentvariables>
+              <variable name="TEST_FILE">
+                <value>unitTest</value>
+              </variable>
+              <variable name="TEST_SETTING_FILE">
+                <value>src\UnitTest.testsettings</value>
+              </variable>
+            </environmentvariables>
+            <tasks>
+              <fetchartifact pipeline="" stage="compile" job="compileTheCode" srcdir="tests/unitTests" dest="src\tests">
+                <runif status="passed" />
+              </fetchartifact>
+              <exec command="del">
+                <arg>/Q</arg>
+                <arg>/F</arg>
+                <arg>#{UNIT_TEST_FILE}.xml</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="del">
+                <arg>/Q</arg>
+                <arg>/F</arg>
+                <arg>#{UNIT_TEST_FILE}.trx</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\MSTest.exe">
+                <arg>/testContainer:src\tests\unitTests\UnitTests.dll</arg>
+                <arg>/resultsfile:#{UNIT_TEST_FILE}.trx</arg>
+                <arg>/testsettings:%TEST_SETTING_FILE%</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="D:\Go\setup\tools\msxsl\msxsl.exe">
+                <arg>#{UNIT_TEST_FILE}.trx</arg>
+                <arg>D:\Go\setup\tools\msxsl\MSBuild-to-NUnit.xslt</arg>
+                <arg>-o</arg>
+                <arg>#{UNIT_TEST_FILE}.xml</arg>
+                <runif status="any" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <test src="#{UNIT_TEST_FILE}.xml" dest="testReports" />
+            </artifacts>
+          </job>
+          <job name="runInfraTests">
+            <environmentvariables>
+              <variable name="TEST_SETTING_FILE">
+                <value>src\default.testsettings</value>
+              </variable>
+            </environmentvariables>
+            <tasks>
+              <fetchartifact pipeline="" stage="compile" job="compileTheCode" srcdir="tests/infraTests" dest="src/tests">
+                <runif status="passed" />
+              </fetchartifact>
+              <exec command="del">
+                <arg>/Q</arg>
+                <arg>/F</arg>
+                <arg>#{INFRA_TEST_FILE}.xml</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="del">
+                <arg>/Q</arg>
+                <arg>/F</arg>
+                <arg>#{INFRA_TEST_FILE}.trx</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\MSTest.exe">
+                <arg>/testContainer:src\tests\infraTests\Tavisca.Common.Infrastructure.Tests.dll</arg>
+                <arg>/resultsfile:#{INFRA_TEST_FILE}.trx</arg>
+                <arg>/testsettings:%TEST_SETTING_FILE%</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="D:\Go\setup\tools\msxsl\msxsl.exe">
+                <arg>#{INFRA_TEST_FILE}.trx</arg>
+                <arg>D:\Go\setup\tools\msxsl\MSBuild-to-NUnit.xslt</arg>
+                <arg>-o</arg>
+                <arg>#{INFRA_TEST_FILE}.xml</arg>
+                <runif status="any" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <test src="#{INFRA_TEST_FILE}.xml" dest="testReports" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+      <stage name="createAndDeployPackage">
+        <jobs>
+          <job name="createAndDeployWebPackage">
+            <tasks>
+              <exec command="xcopy src\Website\Web.dev.config src\Website\Web.config">
+                <arg>/Y</arg>
+                <arg>/I</arg>
+                <arg>/C</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="xcopy src\Website\Scripts\Configuration\dev-configuration.js src\Website\Scripts\configuration.js">
+                <arg>/Y</arg>
+                <arg>/I</arg>
+                <arg>/C</arg>
+                <runif status="passed" />
+              </exec>
+              <exec command="C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe">
+                <arg>/m:2</arg>
+                <arg>/v:minimal</arg>
+                <arg>/P:Configuration=Release</arg>
+                <arg>/t:Rebuild</arg>
+                <arg>/p:SkipInvalidConfigurations=true</arg>
+                <arg>/P:DeployOnBuild=True</arg>
+                <arg>/P:DeployTarget=MSDeployPublish</arg>
+                <arg>/p:MSDeployPublishMethod=RemoteAgent</arg>
+                <arg>/P:MsDeployServiceUrl=http://hfl-dev</arg>
+                <arg>/P:DeployIISAppPath=hfl-dev</arg>
+                <arg>/P:AllowUntrustedCertificate=True</arg>
+                <arg>/P:CreatePackageOnPublish=True</arg>
+                <arg>/P:UserName=PUNE\mchalode</arg>
+                <arg>/P:Password=xsw2XSW@</arg>
+                <arg>/p:OutPath=D:\Test</arg>
+                <arg>src\Website\Website.csproj</arg>
+                <arg>/p:OutPath=D:\Test</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="src\Website\obj\Release\Package\Website.zip" dest="package" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="webapp">
+      <stage name="set.codebase.as.artifact" cleanWorkingDir="true">
+        <jobs>
+          <job name="null.job">
+            <artifacts>
+              <artifact src=".\" dest="codebase" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </templates>
+  <environments>
+    <environment name="hfl-local">
+      <environmentvariables>
+        <variable name="REPOSITORY_URL">
+          <value>https://hfl-cd:zaq1ZAQ!github.com/TaviscaSolutions/hfl.git</value>
+        </variable>
+        <variable name="BRANCH">
+          <value>develop</value>
+        </variable>
+      </environmentvariables>
+      <agents>
+        <physical uuid="a81641bd-e618-4195-a3cf-3a8fa777cdbe" />
+        <physical uuid="deed1adc-7c07-4c5a-990a-2bc12ccdd6f1" />
+      </agents>
+      <pipelines>
+        <pipeline name="hfl-local" />
+      </pipelines>
+    </environment>
+  </environments>
+  <agents>
+    <agent hostname="HFL-BUILD" ipaddress="192.168.2.27" uuid="a81641bd-e618-4195-a3cf-3a8fa777cdbe" />
+    <agent hostname="HFL-BUILD" ipaddress="192.168.2.27" uuid="deed1adc-7c07-4c5a-990a-2bc12ccdd6f1" />
+    <agent hostname="HFL-BUILD" ipaddress="192.168.2.27" uuid="d912acba-85f4-4a02-ace9-84aad9a787bd" />
+    <agent hostname="HFL-BUILD" ipaddress="192.168.2.27" uuid="e4ac0134-0e77-4da9-8eef-2d461702c02b" />
+  </agents>
+</cruise>
+

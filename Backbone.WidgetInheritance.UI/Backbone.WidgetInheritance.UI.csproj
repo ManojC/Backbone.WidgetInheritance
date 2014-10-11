@@ -78,13 +78,8 @@
     <Content Include="Scripts\Views\UserListingView.js" />
     <Content Include="Style\bootstrap.css" />
     <Content Include="Style\Site.css" />
-    <Content Include="Templates\AddressInfo.html" />
-    <Content Include="Templates\EducationInfo.html" />
-    <Content Include="Templates\GeneralInfo.html" />
-    <Content Include="Templates\Details.html" />
-    <Content Include="Templates\UserDetails.html" />
-    <Content Include="Templates\UserListing.html" />
     <Content Include="Web.config" />
+    <Content Include="XMLFile1.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

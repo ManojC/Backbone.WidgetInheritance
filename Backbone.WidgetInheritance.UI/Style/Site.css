@@ -133,6 +133,10 @@ textarea.parsley-error {
     border-bottom: none;
 }
 
+.btpn {
+    border-top: none;
+}
+
 .mbs {
     margin-bottom: 10px;
 }

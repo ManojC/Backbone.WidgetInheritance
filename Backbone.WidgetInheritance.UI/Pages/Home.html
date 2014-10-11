@@ -1,60 +1,222 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>Home</title>
-        <link href="../Style/bootstrap.css" rel="stylesheet" />
-        <link href="../Style/Site.css" rel="stylesheet" />
-    </head>
-    <body>
+<head>
+    <title>Home</title>
+    <link href="../Style/bootstrap.css" rel="stylesheet" />
+    <link href="../Style/Site.css" rel="stylesheet" />
+</head>
+<body>
 
-        <div id="applicationContainer" class="container mtm">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div id="header" class="container">
-                        <div id="headerRow" class="row">
-                            <div class="col-lg-4 text-center">
-                                <button id="btnShowGeneralInfo" class="btn btn-primary col-lg-12">Show General Info</button>
-                            </div>
-                            <div id="Div1" class="col-lg-4 text-center">
-                                <button id="btnShowEducationalInfo" class="btn btn-primary col-lg-12">Show Educational Details</button>
-                            </div>
-                            <div id="Div2" class="col-lg-4 text-center">
-                                <button id="btnShowAddressInfo" class="btn btn-primary col-lg-12">Show Address Details</button>
-                            </div>
+    <div id="applicationContainer" class="container mtm">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="header" class="container">
+                    <div id="headerRow" class="row">
+                        <div class="col-lg-4 text-center">
+                            <button id="btnShowGeneralInfo" class="btn btn-primary col-lg-12">Show General Info</button>
+                        </div>
+                        <div id="Div1" class="col-lg-4 text-center">
+                            <button id="btnShowEducationalInfo" class="btn btn-primary col-lg-12">Show Educational Details</button>
+                        </div>
+                        <div id="Div2" class="col-lg-4 text-center">
+                            <button id="btnShowAddressInfo" class="btn btn-primary col-lg-12">Show Address Details</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mtm">
-            <div class="col-lg-12">
-                <div id="body" class="container">
-                    <div class="row">
-                        <div id="bodyColumn" class="col-lg-12 text-center">Body</div>
-                    </div>
+    </div>
+    <div class="row mtm">
+        <div class="col-lg-12">
+            <div id="body" class="container">
+                <div class="row">
+                    <div id="bodyColumn" class="col-lg-12 text-center">Body</div>
                 </div>
             </div>
         </div>
-        <div class="row mtm">
-            <div class="col-lg-12">
-                <div id="footer" class="container">
-                    <div class="row">
-                        <div id="footerColumn" class="col-lg-12 text-center">Footer</div>
-                    </div>
+    </div>
+    <div class="row mtm">
+        <div class="col-lg-12">
+            <div id="footer" class="container">
+                <div class="row">
+                    <div id="footerColumn" class="col-lg-12 text-center">Footer</div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <script type="text/x-handlebars-template" id="detailsView">
+        <div class="container mtm">
+            <div class="row">
+                <div id="generalInfo" class="col-lg-12">General Info</div>
+            </div>
+            <div class="row mtm">
+                <div id="educationalInfo" class="col-lg-12">Educational Info</div>
+            </div>
+            <div class="row mtm">
+                <div id="addressInfo" class="col-lg-12">Address Info</div>
+            </div>
+        </div>
+    </script>
+    <script type="text/x-handlebars-template" id="generalInfoSection">
+        <div class="container pointer titleView ba bbn">
+            <div class="row">
+                <div class="col-lg-10 text-left">
+                    <h3>General Information</h3>
+                </div>
+                <div class="col-lg-1">
+                    <button class="btn btn-primary col-lg-12 btnInfoEdit mts">Edit</button>
+                </div>
+                <div class="col-lg-1">
+                    <button class="btn btn-danger col-lg-12 btnInfoDelete mts">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="container detailsView ba pas text-center">
+            <div class="row mts">
+                <div class="col-lg-2">Name</div>
+                <div class="col-lg-3">
+                    <input type="text" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="row mts">
+                <div class="col-lg-2">Age</div>
+                <div class="col-lg-3">
+                    <input type="text" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="row mts">
+                <div class="col-lg-2">Birthdate</div>
+                <div class="col-lg-3">
+                    <input type="datetime" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="row mts mbs">
+                <div class="col-lg-2">Hobbies</div>
+                <div class="col-lg-3">
+                    <textarea class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="container pointer titleView ba btpn hidden">
+            <div class="row mbs">
+                <div class="col-lg-1 col-lg-offset-10">
+                    <button id="btnSaveGeneralInfo" class="btn btn-success col-lg-12 btnInfoEdit mts">Save</button>
+                </div>
+                <div class="col-lg-1">
+                    <button id="btnCancelGeneralInfo" class="btn btn-danger col-lg-12 btnInfoDelete mts">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/x-handlebars-template" id="educationalInfoSection">
+        <div class="container pointer titleView ba bbn">
+            <div class="row">
+                <div class="col-lg-10 text-left">
+                    <h3>Educational Information</h3>
+                </div>
+                <div class="col-lg-1">
+                    <button class="btn btn-primary col-lg-12 btnInfoEdit mts">Edit</button>
+                </div>
+                <div class="col-lg-1">
+                    <button class="btn btn-danger col-lg-12 btnInfoDelete mts">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="container detailsView ba pas text-left">
+            <div class="row mts">
+                <div class="col-lg-2">10th %</div>
+                <div class="col-lg-3">
+                    <input type="text" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="row mts">
+                <div class="col-lg-2">12th %</div>
+                <div class="col-lg-3">
+                    <input type="text" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="row mts">
+                <div class="col-lg-2">Degree %</div>
+                <div class="col-lg-3">
+                    <input type="datetime" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="row mts mbs">
+                <div class="col-lg-2">Extra Courses</div>
+                <div class="col-lg-3">
+                    <textarea class="form-control" />
+                </div>
+            </div>
+            <div class="row mts mbs">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-3">
+                    <button id="btnSaveEducationalInfo" class="btn btn-success col-lg-12 btnSaveInfo">Save Information</button>
+                </div>
+            </div>
         </div>
 
-            <script type="text/javascript" src="../Scripts/Libraries/jquery-1.10.2.min.js"></script>
-        <script type="text/javascript" src="../Scripts/Libraries/underscore-min.js"></script>
-        <script type="text/javascript" src="../Scripts/Libraries/backbone-min.js"></script>
-        <script type="text/javascript" src="../Scripts/Libraries/handlebars-1.3.js"></script>
-        <script type="text/javascript" src="../Scripts/Views/UserDetailsView.js"></script>
-        <script type="text/javascript" src="../Scripts/Views/InfoView.js"></script>
-        <script type="text/javascript" src="../Scripts/Views/GeneralInfoView.js"></script>
-        <script type="text/javascript" src="../Scripts/Views/EducationInfoView.js"></script>
-        <script type="text/javascript" src="../Scripts/Views/AddressInfoView.js"></script>
-        <script type="text/javascript" src="../Scripts/AppStart/AppStart.js"></script>
-    </body>
+
+    </script>
+    <script type="text/x-handlebars-template" id="addressInfoSection">
+        <div class="container titleView pointer ba bbn">
+            <div class="row">
+                <div class="col-lg-10 text-left">
+                    <h3>Address Information</h3>
+                </div>
+                <div class="col-lg-1">
+                    <button class="btn btn-primary col-lg-12 btnInfoEdit mts">Edit</button>
+                </div>
+                <div class="col-lg-1">
+                    <button class="btn btn-danger col-lg-12 btnInfoDelete mts">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="container detailsView ba pas text-left">
+            <div class="row mts">
+                <div class="col-lg-2">Address1</div>
+                <div class="col-lg-3">
+                    <input type="text" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="row mts">
+                <div class="col-lg-2">Address2</div>
+                <div class="col-lg-3">
+                    <input type="text" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="row mts">
+                <div class="col-lg-2">City</div>
+                <div class="col-lg-3">
+                    <input type="datetime" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="row mts mbs">
+                <div class="col-lg-2">Country</div>
+                <div class="col-lg-3">
+                    <input type="datetime" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="row mts mbs">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-3">
+                    <button id="btnSaveAddressInfo" class="btn btn-success col-lg-12 btnSaveInfo">Save Information</button>
+                </div>
+            </div>
+        </div>
+
+
+    </script>
+
+    <script type="text/javascript" src="../Scripts/Libraries/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../Scripts/Libraries/underscore-min.js"></script>
+    <script type="text/javascript" src="../Scripts/Libraries/backbone-min.js"></script>
+    <script type="text/javascript" src="../Scripts/Libraries/handlebars-1.3.js"></script>
+    <script type="text/javascript" src="../Scripts/Views/UserDetailsView.js"></script>
+    <script type="text/javascript" src="../Scripts/Views/InfoView.js"></script>
+    <script type="text/javascript" src="../Scripts/Views/GeneralInfoView.js"></script>
+    <script type="text/javascript" src="../Scripts/Views/EducationInfoView.js"></script>
+    <script type="text/javascript" src="../Scripts/Views/AddressInfoView.js"></script>
+    <script type="text/javascript" src="../Scripts/AppStart/AppStart.js"></script>
+</body>
 </html>

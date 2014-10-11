@@ -8,22 +8,13 @@
 
         el: '#headerRow',
 
-        templatePath: '../Templates/Details.html',
+        templateId: '#detailsView',
 
         template: '',
 
         initialize: function () {
-            var that = this;
-            $.ajax({
-                url: this.templatePath,
-                async: false,
-                type: 'GET',
-                success: function (template) {
-                    that.template = template;
-                    $('#bodyColumn').html(template);
-                    console.log(++window.WI.testCount + '. callback for details view template completed!');
-                }
-            });
+            this.template = $(this.templateId).html();
+            $('#bodyColumn').html(this.template);
         },
 
         render: function () {
