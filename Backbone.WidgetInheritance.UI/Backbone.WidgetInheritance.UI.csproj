@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Pages\Copy of Home.html" />
     <Content Include="Pages\Home.html" />
     <Content Include="Scripts\AppStart\AppStart.js" />
     <Content Include="Scripts\Libraries\backbone-min.js" />
@@ -73,7 +74,7 @@
     <Content Include="Scripts\Views\GeneralInfoView.js" />
     <Content Include="Scripts\Views\AddressInfoView.js" />
     <Content Include="Scripts\Views\EducationInfoView.js" />
-    <Content Include="Scripts\Views\InfoView.js" />
+    <Content Include="Scripts\Views\infoView.js" />
     <Content Include="Scripts\Views\UserDetailsView.js" />
     <Content Include="Scripts\Views\UserListingView.js" />
     <Content Include="Style\bootstrap.css" />

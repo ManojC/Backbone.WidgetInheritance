@@ -17,9 +17,7 @@
             $('#bodyColumn').html(this.template);
         },
 
-        render: function () {
-
-        },
+        render: function () { },
 
         events: {
             'click #btnShowGeneralInfo': 'renderGeneralInfoView',
@@ -28,11 +26,23 @@
         },
 
         renderGeneralInfoView: function () {
+            var self = this;
+            if (!this.generalInfoModel)
+                this.generalInfoModel = new (window.WI.Models.GeneralInfoModel.extend({
+                    defaults: {
+                        Name: '2pm airport drop ',
+                        Place: 'Johannesburg',
+                        Location: 'O R Tambo Airport',
+                        Time: '2 PM',
+                        Vehicle: 'Bus'
+                    }
+                }));
             if (!this.generalInfoView)
-                this.generalInfoView = new window.WI.Views.GeneralInfoView();
-            this.generalInfoView.render('GeneralInfoView', function () {
-                console.log(++window.WI.testCount + '. success callback for general info render');
-            });
+                this.generalInfoView = new (window.WI.Views.GeneralInfoView.extend({
+                    isReadOnly: true,
+                    model: self.generalInfoModel
+                }));
+            this.generalInfoView.render();
         },
 
         renderEducationalInfoView: function () {

@@ -26,6 +26,7 @@
             </div>
         </div>
     </div>
+
     <div class="row mtm">
         <div class="col-lg-12">
             <div id="body" class="container">
@@ -35,6 +36,7 @@
             </div>
         </div>
     </div>
+
     <div class="row mtm">
         <div class="col-lg-12">
             <div id="footer" class="container">
@@ -47,171 +49,224 @@
 
     <script type="text/x-handlebars-template" id="detailsView">
         <div class="container mtm">
-            <div class="row">
-                <div id="generalInfo" class="col-lg-12">General Info</div>
-            </div>
-            <div class="row mtm">
-                <div id="educationalInfo" class="col-lg-12">Educational Info</div>
-            </div>
-            <div class="row mtm">
-                <div id="addressInfo" class="col-lg-12">Address Info</div>
-            </div>
+            <div id="generalInfo" class="row"></div>
+            <div id="educationalInfo" class="row mtm"></div>
+            <div id="addressInfo" class="row mtm"></div>
         </div>
     </script>
-    <script type="text/x-handlebars-template" id="generalInfoSection">
-        <div class="container pointer titleView ba bbn">
-            <div class="row">
-                <div class="col-lg-10 text-left">
-                    <h3>General Information</h3>
-                </div>
-                <div class="col-lg-1">
-                    <button class="btn btn-primary col-lg-12 btnInfoEdit mts">Edit</button>
-                </div>
-                <div class="col-lg-1">
-                    <button class="btn btn-danger col-lg-12 btnInfoDelete mts">Delete</button>
+
+    <script type="text/x-handlebars-template" id="generalInfoEditSection">
+        <div class="col-lg-12">
+            <div class="container pointer titleView ba bbn">
+                <div class="row">
+                    <div class="col-lg-10 text-left">
+                        <h3>Arrival Edit</h3>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container detailsView ba pas text-center">
-            <div class="row mts">
-                <div class="col-lg-2">Name</div>
-                <div class="col-lg-3">
-                    <input type="text" value="" class="form-control" />
+            <div class="container detailsView ba pas text-center">
+                <div class="row mts">
+                    <div class="col-lg-2">Name</div>
+                    <div class="col-lg-3">
+                        <input id="txtEditName" type="text" value="{{Name}}" class="form-control" />
+                    </div>
+                </div>
+                <div class="row mts">
+                    <div class="col-lg-2">Place</div>
+                    <div class="col-lg-3">
+                        <input id="txtEditPlace" type="text" value="{{Place}}" class="form-control" />
+                    </div>
+                </div>
+                <div class="row mts">
+                    <div class="col-lg-2">Location</div>
+                    <div class="col-lg-3">
+                        <input id="txtEditLocation" type="text" value="{{Location}}" class="form-control" />
+                    </div>
+                </div>
+                <div class="row mts bold">
+                    <div class="col-lg-2 col-lg-offset1-2">Pick Up</div>
+                </div>
+                <div class="row mts mbs">
+                    <div class="col-lg-2">Time</div>
+                    <div class="col-lg-3">
+                        <input id="txtEditTime" type="datetime" value="{{Time}}" class="form-control" />
+                    </div>
+                    <div class="col-lg-2">Vehicle</div>
+                    <div class="col-lg-3">
+                        <input id="txtEditVehicle" type="text" value="{{Vehicle}}" class="form-control" />
+                    </div>
                 </div>
             </div>
-            <div class="row mts">
-                <div class="col-lg-2">Age</div>
-                <div class="col-lg-3">
-                    <input type="text" value="" class="form-control" />
-                </div>
-            </div>
-            <div class="row mts">
-                <div class="col-lg-2">Birthdate</div>
-                <div class="col-lg-3">
-                    <input type="datetime" value="" class="form-control" />
-                </div>
-            </div>
-            <div class="row mts mbs">
-                <div class="col-lg-2">Hobbies</div>
-                <div class="col-lg-3">
-                    <textarea class="form-control" />
-                </div>
-            </div>
-        </div>
-        <div class="container pointer titleView ba btpn hidden">
-            <div class="row mbs">
-                <div class="col-lg-1 col-lg-offset-10">
-                    <button id="btnSaveGeneralInfo" class="btn btn-success col-lg-12 btnInfoEdit mts">Save</button>
-                </div>
-                <div class="col-lg-1">
-                    <button id="btnCancelGeneralInfo" class="btn btn-danger col-lg-12 btnInfoDelete mts">Cancel</button>
+            <div class="container ba btpn">
+                <div class="row mbs">
+                    <div class="col-lg-1 col-lg-offset-10">
+                        <button id="btnSaveGeneralInfo" class="btn btn-success col-lg-12 btnSaveInfo mts">Save</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button id="btnCancelGeneralInfo" class="btn btn-danger col-lg-12 btnCancelInfo mts">Cancel</button>
+                    </div>
                 </div>
             </div>
         </div>
     </script>
+    <script type="text/x-handlebars-template" id="generalInfoReadonlySection">
+        <div class="col-lg-12">
+            <div class="container pointer titleView ba bbn">
+                <div class="row">
+                    <div class="col-lg-10 text-left">
+                        <h3>Arrival</h3>
+                    </div>
+                    <div class="col-lg-1">
+                        <button class="btn btn-primary col-lg-12 btnEditInfo mts">Edit</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button class="btn btn-danger col-lg-12 btnDeleteInfo mts">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="container detailsView ba pas text-center">
+                <div class="row mts">
+                    <div class="col-lg-2">Name</div>
+                    <div class="col-lg-3 text-left">
+                        <label id="lblName">{{Name}}</label>
+                    </div>
+                </div>
+                <div class="row mts">
+                    <div class="col-lg-2">Place</div>
+                    <div class="col-lg-3 text-left">
+                        <label id="lblPlace">{{Place}}</label>
+                    </div>
+                </div>
+                <div class="row mts">
+                    <div class="col-lg-2">Location</div>
+                    <div class="col-lg-3 text-left">
+                        <label id="lblLocation">{{Location}}</label>
+                    </div>
+                </div>
+                <div class="row mts bold">
+                    <div class="col-lg-2 col-lg-offset1-2">Pick Up</div>
+                </div>
+                <div class="row mts mbs">
+                    <div class="col-lg-2">Time</div>
+                    <div class="col-lg-3 text-left">
+                        <label id="lblTime">{{Time}}</label>
+                    </div>
+                    <div class="col-lg-2">Vehicle</div>
+                    <div class="col-lg-3 text-left">
+                        <label id="lblVehicle">{{Vehicle}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </script>
+
     <script type="text/x-handlebars-template" id="educationalInfoSection">
-        <div class="container pointer titleView ba bbn">
-            <div class="row">
-                <div class="col-lg-10 text-left">
-                    <h3>Educational Information</h3>
+        <div class="col-lg-12">
+            <div class="container pointer titleView ba bbn">
+                <div class="row">
+                    <div class="col-lg-10 text-left">
+                        <h3>Educational Information</h3>
+                    </div>
+                    <div class="col-lg-1">
+                        <button class="btn btn-primary col-lg-12 btnEditInfo mts">Edit</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button class="btn btn-danger col-lg-12 btnDeleteInfo mts">Delete</button>
+                    </div>
                 </div>
-                <div class="col-lg-1">
-                    <button class="btn btn-primary col-lg-12 btnInfoEdit mts">Edit</button>
+            </div>
+            <div class="container detailsView ba pas text-left">
+                <div class="row mts">
+                    <div class="col-lg-2">10th %</div>
+                    <div class="col-lg-3">
+                        <input type="text" value="" class="form-control" />
+                    </div>
                 </div>
-                <div class="col-lg-1">
-                    <button class="btn btn-danger col-lg-12 btnInfoDelete mts">Delete</button>
+                <div class="row mts">
+                    <div class="col-lg-2">12th %</div>
+                    <div class="col-lg-3">
+                        <input type="text" value="" class="form-control" />
+                    </div>
+                </div>
+                <div class="row mts">
+                    <div class="col-lg-2">Degree %</div>
+                    <div class="col-lg-3">
+                        <input type="datetime" value="" class="form-control" />
+                    </div>
+                </div>
+                <div class="row mts mbs">
+                    <div class="col-lg-2">Extra Courses</div>
+                    <div class="col-lg-3">
+                        <textarea class="form-control" />
+                    </div>
+                </div>
+                <div class="row mts mbs">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-3">
+                        <button id="btnSaveEducationalInfo" class="btn btn-success col-lg-12 btnSaveInfo">Save Information</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="container detailsView ba pas text-left">
-            <div class="row mts">
-                <div class="col-lg-2">10th %</div>
-                <div class="col-lg-3">
-                    <input type="text" value="" class="form-control" />
-                </div>
-            </div>
-            <div class="row mts">
-                <div class="col-lg-2">12th %</div>
-                <div class="col-lg-3">
-                    <input type="text" value="" class="form-control" />
-                </div>
-            </div>
-            <div class="row mts">
-                <div class="col-lg-2">Degree %</div>
-                <div class="col-lg-3">
-                    <input type="datetime" value="" class="form-control" />
-                </div>
-            </div>
-            <div class="row mts mbs">
-                <div class="col-lg-2">Extra Courses</div>
-                <div class="col-lg-3">
-                    <textarea class="form-control" />
-                </div>
-            </div>
-            <div class="row mts mbs">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-3">
-                    <button id="btnSaveEducationalInfo" class="btn btn-success col-lg-12 btnSaveInfo">Save Information</button>
-                </div>
-            </div>
-        </div>
-
-
     </script>
+
     <script type="text/x-handlebars-template" id="addressInfoSection">
-        <div class="container titleView pointer ba bbn">
-            <div class="row">
-                <div class="col-lg-10 text-left">
-                    <h3>Address Information</h3>
+        <div class="col-lg-12">
+            <div class="container titleView pointer ba bbn">
+                <div class="row">
+                    <div class="col-lg-10 text-left">
+                        <h3>Address Information</h3>
+                    </div>
+                    <div class="col-lg-1">
+                        <button class="btn btn-primary col-lg-12 btnEditInfo mts">Edit</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button class="btn btn-danger col-lg-12 btnDeleteInfo mts">Delete</button>
+                    </div>
                 </div>
-                <div class="col-lg-1">
-                    <button class="btn btn-primary col-lg-12 btnInfoEdit mts">Edit</button>
+            </div>
+            <div class="container detailsView ba pas text-left">
+                <div class="row mts">
+                    <div class="col-lg-2">Address1</div>
+                    <div class="col-lg-3">
+                        <input type="text" value="" class="form-control" />
+                    </div>
                 </div>
-                <div class="col-lg-1">
-                    <button class="btn btn-danger col-lg-12 btnInfoDelete mts">Delete</button>
+                <div class="row mts">
+                    <div class="col-lg-2">Address2</div>
+                    <div class="col-lg-3">
+                        <input type="text" value="" class="form-control" />
+                    </div>
+                </div>
+                <div class="row mts">
+                    <div class="col-lg-2">City</div>
+                    <div class="col-lg-3">
+                        <input type="datetime" value="" class="form-control" />
+                    </div>
+                </div>
+                <div class="row mts mbs">
+                    <div class="col-lg-2">Country</div>
+                    <div class="col-lg-3">
+                        <input type="datetime" value="" class="form-control" />
+                    </div>
+                </div>
+                <div class="row mts mbs">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-3">
+                        <button id="btnSaveAddressInfo" class="btn btn-success col-lg-12 btnSaveInfo">Save Information</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="container detailsView ba pas text-left">
-            <div class="row mts">
-                <div class="col-lg-2">Address1</div>
-                <div class="col-lg-3">
-                    <input type="text" value="" class="form-control" />
-                </div>
-            </div>
-            <div class="row mts">
-                <div class="col-lg-2">Address2</div>
-                <div class="col-lg-3">
-                    <input type="text" value="" class="form-control" />
-                </div>
-            </div>
-            <div class="row mts">
-                <div class="col-lg-2">City</div>
-                <div class="col-lg-3">
-                    <input type="datetime" value="" class="form-control" />
-                </div>
-            </div>
-            <div class="row mts mbs">
-                <div class="col-lg-2">Country</div>
-                <div class="col-lg-3">
-                    <input type="datetime" value="" class="form-control" />
-                </div>
-            </div>
-            <div class="row mts mbs">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-3">
-                    <button id="btnSaveAddressInfo" class="btn btn-success col-lg-12 btnSaveInfo">Save Information</button>
-                </div>
-            </div>
-        </div>
-
-
     </script>
 
     <script type="text/javascript" src="../Scripts/Libraries/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../Scripts/Libraries/underscore-min.js"></script>
     <script type="text/javascript" src="../Scripts/Libraries/backbone-min.js"></script>
     <script type="text/javascript" src="../Scripts/Libraries/handlebars-1.3.js"></script>
+    <script type="text/javascript" src="../Scripts/Models/InfoModel.js"></script>
+    <script type="text/javascript" src="../Scripts/Models/GeneralInfoModel.js"></script>
     <script type="text/javascript" src="../Scripts/Views/UserDetailsView.js"></script>
     <script type="text/javascript" src="../Scripts/Views/InfoView.js"></script>
     <script type="text/javascript" src="../Scripts/Views/GeneralInfoView.js"></script>

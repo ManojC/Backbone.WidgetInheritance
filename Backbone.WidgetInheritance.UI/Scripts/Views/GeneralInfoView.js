@@ -9,7 +9,9 @@
         //default value for element. Expected to be overridden by child view.
         el: '#generalInfo',
 
-        templateId: '#generalInfoSection',
+        readOnlyTemplateId: '#generalInfoReadonlySection',
+
+        editModeTemplateId: '#generalInfoEditSection',
 
         //this can be overridden by child view for custom event handling..
         _initializeChild: function () {
@@ -17,9 +19,7 @@
         },
 
         _bindChildEvents: function () {
-            this.childEvents = {
-                'click input.form-control': '_titleClick'
-            };
+            this.childEvents = {};
             this.trigger('bindChildEvents');
             this.on({
                 'doSomething': this._doSomething
@@ -28,8 +28,29 @@
 
         getDatFromServer: function () { },
 
+        _editView: function (e) {
+            this.isReadOnly = false;
+            this._fetchTemplate();
+            this.render();
+        },
+
         _saveView: function () {
-            $('.form-control', this.$el).val('');
+
+            this.model.set({ 'Name': $('#txtEditName').val() });
+            this.model.set({ 'Place': $('#txtEditPlace').val() });
+            this.model.set({ 'Location': $('#txtEditLocation').val() });
+            this.model.set({ 'Time': $('#txtEditTime').val() });
+            this.model.set({ 'Vehicle': $('#txtEditVehicle').val() });
+
+            this.isReadOnly = true;
+            this._fetchTemplate();
+            this.render();
+        },
+
+        _cancelView: function () {
+            this.isReadOnly = true;
+            this._fetchTemplate();
+            this.render();
         },
 
         _deleteView: function (e) {
@@ -40,19 +61,27 @@
             });
         },
 
-        _editView: function (e) {
-
-            $('.form-control', this.$el).val('general');
-            
-        },
-
         _titleClick: function () {
-            $('.detailsView', this.$el).unbind('slideToggle').slideToggle(500);
-            this.$el.find('.titleView').toggleClass('bbn');
+            this.$el.find('.titleView').toggleClass('bbn').siblings().slideToggle(500);
         },
 
         _fetchTemplate: function () {
-            this.template = $(this.templateId).html();
+
+            if (this.isReadOnly && !this.readOnlyTemplate) {
+                if (!this.readOnlyTemplateId) {
+                    alert('template not found !');
+                    return;
+                }
+                this.readOnlyTemplate = $(this.readOnlyTemplateId).html();
+            }
+
+            else {
+                if (!this.readOnlyTemplateId) {
+                    alert('template not found !');
+                    return;
+                }
+                this.editModeTemplate = $(this.editModeTemplateId).html();
+            }
         },
 
         _doSomething: function () {
