@@ -33,7 +33,7 @@
                         Name: '2pm airport drop ',
                         Place: 'Johannesburg',
                         Location: 'O R Tambo Airport',
-                        Time: '2 PM',
+                        Time: 2,
                         Vehicle: 'Bus'
                     }
                 }));

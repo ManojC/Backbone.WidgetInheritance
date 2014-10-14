@@ -152,3 +152,11 @@ textarea.parsley-error {
 .bold {
     font-weight: bold;
 }
+
+.validView {
+    border-left: greenyellow solid thick;
+}
+
+.invalidView {
+    border-left: red solid thick;
+}

@@ -14,13 +14,11 @@
         editModeTemplateId: '#generalInfoEditSection',
 
         //this can be overridden by child view for custom event handling..
-        _initializeChild: function () {
+        initializeChild: function () {
             this._bindChildEvents();
         },
 
         _bindChildEvents: function () {
-            this.childEvents = {};
-            this.trigger('bindChildEvents');
             this.on({
                 'doSomething': this._doSomething
             });
@@ -29,6 +27,7 @@
         getDatFromServer: function () { },
 
         _editView: function (e) {
+            this.validateView();
             this.isReadOnly = false;
             this._fetchTemplate();
             this.render();
@@ -42,18 +41,24 @@
             this.model.set({ 'Time': $('#txtEditTime').val() });
             this.model.set({ 'Vehicle': $('#txtEditVehicle').val() });
 
-            this.isReadOnly = true;
-            this._fetchTemplate();
-            this.render();
+            this.model.save();
+
+            if (this.model.isValid) {
+                this.isReadOnly = true;
+                this._fetchTemplate();
+                this.render();
+            }
         },
 
         _cancelView: function () {
+            this.validateView();
             this.isReadOnly = true;
             this._fetchTemplate();
             this.render();
         },
 
         _deleteView: function (e) {
+            this.validateView();
             var self = this;
             this.$el.slideUp(500, function () {
                 self.$el.empty().show();

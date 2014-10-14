@@ -20,19 +20,22 @@
             this.bindEvents();
 
             //add child events and extend events object
-            this._initializeChild();
-            _.extend(this.events, this.childEvents || {});
+            this.initializeChild();
+
+            _.extend(this.events, this.baseEvents);
         },
 
         //child view should override this
-        _initializeChild: function () { },
+        initializeChild: function () { },
 
         render: function () {
             var html = Handlebars.compile(this.isReadOnly ? this.readOnlyTemplate : this.editModeTemplate)(this.model.toJSON());
             this.$el.html(html);
         },
 
-        events: {
+        events: {},
+
+        baseEvents: {
             'click .btnEditInfo': function () { this.trigger("edit"); return false; },
             'click .btnSaveInfo': function () { this.trigger("save"); return false; },
             'click .btnCancelInfo': function () { this.trigger("cancel"); return false; },
@@ -47,21 +50,20 @@
             //this.listenTo(this.model, 'error', this._handleError);
             //// when model is saved, sync event is raised
             //this.listenTo(this.model, 'sync', this._saveSuccessHandler);
-            //// let view know that code is unique or not
-            //this.listenTo(this.model, 'codeUnique', this._handleCodeUnique);
-            
+            // let view know that code is unique or not
+            this.listenTo(this.model, 'invalid', this.validateView);
+
             this.on({
                 'edit': this._editView,
                 'save': this._saveView,
                 'cancel': this._cancelView,
                 'delete': this._deleteView,
                 'titleClick': this._titleClick,
-                'fetchTemplate': this._fetchTemplate,
-                'bindChildEvents': this._baseBindChildEvents //this event should be triggered from child view.
+                'fetchTemplate': this._fetchTemplate
             });
 
-            if (this._initializeChild && typeof (this._initializeChild) == "function")
-                this._initializeChild();
+            if (this.initializeChild && typeof (this.initializeChild) == "function")
+                this.initializeChild();
             this.trigger("fetchTemplate");
         },
 
@@ -73,9 +75,18 @@
         _titleClick: function () { },
         _fetchTemplate: function () { },
 
-        //add all child events in 'childEvents' object and trigger 'bindChildEvents' to extend backbone events object
-        _baseBindChildEvents: function () {
-            _.extend(this.events, this.childEvents || {});
+        validateView: function (args) {
+            if (args === undefined) {
+                $('#messageViewContainer').html('');
+                this.$el.removeClass('validView').removeClass('invalidView');
+            }
+            else if (args[0] === true) {
+                $('#messageViewContainer').html('<div class="alert alert-success" role="alert">Success!</div>');
+                this.$el.removeClass('invalidView').addClass('validView');
+            } else if (args[0] === false) {
+                $('#messageViewContainer').html('<div class="alert alert-danger" role="alert">' + args[1] + '</div>');
+                this.$el.removeClass('validView').addClass('invalidView');
+            }
         },
 
         destroy: function () {
