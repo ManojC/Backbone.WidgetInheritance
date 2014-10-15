@@ -15,10 +15,10 @@
 
         //this can be overridden by child view for custom event handling..
         initializeChild: function () {
-            this._bindChildEvents();
+            this._bindEvents();
         },
 
-        _bindChildEvents: function () {
+        _bindEvents: function () {
             this.on({
                 'doSomething': this._doSomething
             });
@@ -35,18 +35,23 @@
 
         _saveView: function () {
 
-            this.model.set({ 'Name': $('#txtEditName').val() });
-            this.model.set({ 'Place': $('#txtEditPlace').val() });
-            this.model.set({ 'Location': $('#txtEditLocation').val() });
-            this.model.set({ 'Time': $('#txtEditTime').val() });
-            this.model.set({ 'Vehicle': $('#txtEditVehicle').val() });
+            this.model.set({
+                'Name': $('#txtEditName').val(),
+                'Place': $('#txtEditPlace').val(),
+                'Location': $('#txtEditLocation').val(),
+                'Time': $('#txtEditTime').val(),
+                'Vehicle': $('#txtEditVehicle').val()
+            });
 
             this.model.save();
 
             if (this.model.isValid) {
+                this.validateView();
                 this.isReadOnly = true;
                 this._fetchTemplate();
                 this.render();
+            } else {
+                //handle validation here..
             }
         },
 
@@ -73,19 +78,15 @@
         _fetchTemplate: function () {
 
             if (this.isReadOnly && !this.readOnlyTemplate) {
-                if (!this.readOnlyTemplateId) {
+                this.readOnlyTemplateId ?
+                    this.readOnlyTemplate = $(this.readOnlyTemplateId).html() :
                     alert('template not found !');
-                    return;
-                }
-                this.readOnlyTemplate = $(this.readOnlyTemplateId).html();
             }
 
             else {
-                if (!this.readOnlyTemplateId) {
+                this.readOnlyTemplateId ?
+                    this.editModeTemplate = $(this.editModeTemplateId).html() :
                     alert('template not found !');
-                    return;
-                }
-                this.editModeTemplate = $(this.editModeTemplateId).html();
             }
         },
 

@@ -17,12 +17,10 @@
         initialize: function () {
 
             //bind events here..
-            this.bindEvents();
+            this._bindEvents();
 
             //add child events and extend events object
             this.initializeChild();
-
-            _.extend(this.events, this.baseEvents);
         },
 
         //child view should override this
@@ -33,9 +31,7 @@
             this.$el.html(html);
         },
 
-        events: {},
-
-        baseEvents: {
+        events: {
             'click .btnEditInfo': function () { this.trigger("edit"); return false; },
             'click .btnSaveInfo': function () { this.trigger("save"); return false; },
             'click .btnCancelInfo': function () { this.trigger("cancel"); return false; },
@@ -43,14 +39,20 @@
             'click .titleView': function () { this.trigger("titleClick"); return false; }
         },
 
-        bindEvents: function () {
+        //to be oberridden by child view
+        childEvents: {},
+
+        _bindEvents: function () {
+            
+            _.extend(this.events, this.childEvents);
+            
             //// when model is changed, change event is trigger, used for rendering
             //this.listenTo(this.model, 'change', this.render);
             //// if any error occurs while saving or fetching model, an error event is thrown
             //this.listenTo(this.model, 'error', this._handleError);
             //// when model is saved, sync event is raised
             //this.listenTo(this.model, 'sync', this._saveSuccessHandler);
-            // let view know that code is unique or not
+            // let view know that model is invalid
             this.listenTo(this.model, 'invalid', this.validateView);
 
             this.on({
@@ -61,9 +63,6 @@
                 'titleClick': this._titleClick,
                 'fetchTemplate': this._fetchTemplate
             });
-
-            if (this.initializeChild && typeof (this.initializeChild) == "function")
-                this.initializeChild();
             this.trigger("fetchTemplate");
         },
 
@@ -75,6 +74,8 @@
         _titleClick: function () { },
         _fetchTemplate: function () { },
 
+        //this function will be triggered by 'invalid' event bound on model
+        //args will be the array sent after triggering the event from model itself
         validateView: function (args) {
             if (args === undefined) {
                 $('#messageViewContainer').html('');

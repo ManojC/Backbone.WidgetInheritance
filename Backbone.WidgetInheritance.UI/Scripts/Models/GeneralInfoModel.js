@@ -10,21 +10,21 @@
 
         save: function () {
             this.validate();
-            if (this.isValid)
-                console.log('data validated.. ready to be sent to server');
         },
 
         create: function () { },
 
         update: function () { },
 
+        //this function is called for every model update
         validate: function () {
             if (isNaN(this.get('Time'))) {
+                //restore model if validation fails
+                this.attributes = this.previousAttributes();
                 this.isValid = false;
                 this.trigger('invalid', [false, 'not a number']);
             }
-            else
-                this.isValid = true;
+            else this.isValid = true;
         }
     });
 
