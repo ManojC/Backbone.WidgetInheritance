@@ -6,19 +6,26 @@
     //base info view definition
     window.WI.Views.GeneralInfoView = window.WI.Views.InfoView.extend({
 
-        //default value for element. Expected to be overridden by child view.
+        //default value for element. Expected to be overridden in render function.
         el: '#generalInfo',
 
-        readOnlyTemplateId: '#generalInfoReadonlySection',
-
-        editModeTemplateId: '#generalInfoEditSection',
+        templateId: '#generalInfoSection',
 
         //this can be overridden by child view for custom event handling..
         initializeChild: function () {
-            this._bindEvents();
         },
 
-        _bindEvents: function () {
+        renderChild: function (container) {
+            this.el = container;
+            var html = Handlebars.compile(this.template)(this.model.toJSON());
+            this.$el.html(html);
+        },
+
+        childEvents: {
+            'focusout input:text': '_trim'
+        },
+
+        _bindChildEvents: function () {
             this.on({
                 'doSomething': this._doSomething
             });
@@ -28,7 +35,7 @@
 
         _editView: function (e) {
             this.validateView();
-            this.isReadOnly = false;
+            this.model.set({ 'isReadOnly': false });
             this._fetchTemplate();
             this.render();
         },
@@ -47,17 +54,17 @@
 
             if (this.model.isValid) {
                 this.validateView();
-                this.isReadOnly = true;
+                this.model.set({ 'isReadOnly': true });
                 this._fetchTemplate();
                 this.render();
             } else {
-                //handle validation here..
+                //handle UI validation here..
             }
         },
 
         _cancelView: function () {
             this.validateView();
-            this.isReadOnly = true;
+            this.model.set({ 'isReadOnly': true });
             this._fetchTemplate();
             this.render();
         },
@@ -76,22 +83,19 @@
         },
 
         _fetchTemplate: function () {
-
-            if (this.isReadOnly && !this.readOnlyTemplate) {
-                this.readOnlyTemplateId ?
-                    this.readOnlyTemplate = $(this.readOnlyTemplateId).html() :
-                    alert('template not found !');
-            }
-
-            else {
-                this.readOnlyTemplateId ?
-                    this.editModeTemplate = $(this.editModeTemplateId).html() :
-                    alert('template not found !');
-            }
+            if (this.templateId) {
+                if (!this.template)
+                    this.template = $(this.templateId).html();
+            } else
+                alert('template not found !');
         },
 
         _doSomething: function () {
             console.log('doing something!');
+        },
+
+        _trim: function (e) {
+            $('#' + e.currentTarget.id).val($('#' + e.currentTarget.id).val().trim());
         }
     });
 

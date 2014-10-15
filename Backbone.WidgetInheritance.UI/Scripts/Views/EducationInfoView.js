@@ -4,7 +4,7 @@
     window.WI.Views = window.WI.Views || {};
 
     //base info view definition
-    window.WI.Views.EducationInfoView = window.WI.Views.InfoView.extend({
+    window.WI.Views.EducationalInfoView = window.WI.Views.InfoView.extend({
 
         //default value for element. Expected to be overridden by child view.
         el: '#educationalInfo',
@@ -12,50 +12,86 @@
         templateId: '#educationalInfoSection',
 
         //this can be overridden by child view for custom event handling..
-        _initializeChild: function () {
-            this._bindChildEvents();
+        initializeChild: function () {
+        },
+
+        renderChild: function (container) {
+            this.el = container;
+            var html = Handlebars.compile(this.template)(this.model.toJSON());
+            this.$el.html(html);
+        },
+
+        childEvents: {
+            'focusout input:text': '_trim'
         },
 
         _bindChildEvents: function () {
-            this.childEvents = {
-                'click input.form-control': '_titleClick'
-            };
-            this.trigger('bindChildEvents');
             this.on({
                 'doSomething': this._doSomething
             });
         },
 
-        getDatFromServer: function () { },
-
-        _saveView: function () {
-            $('.form-control', this.$el).val('');
+        _editView: function (e) {
+            this.validateView();
+            this.model.set({ 'isReadOnly': false });
+            this._fetchTemplate();
+            this.render();
         },
 
-        _deleteView: function () {
+        _saveView: function () {
+
+            this.model.set({
+                'Stay': $('#txtAccommodationStay').val(),
+                'Location': $('#txtAccommodationLocation').val(),
+                'Description': $('#txtAccommodationDescription').val()
+            });
+
+            this.model.save();
+
+            if (this.model.isValid) {
+                this.validateView();
+                this.model.set({ 'isReadOnly': true });
+                this._fetchTemplate();
+                this.render();
+            } else {
+                //handle UI validation here..
+            }
+        },
+
+        _cancelView: function () {
+            this.validateView();
+            this.model.set({ 'isReadOnly': true });
+            this._fetchTemplate();
+            this.render();
+        },
+
+        _deleteView: function (e) {
+            this.validateView();
             var self = this;
             this.$el.slideUp(500, function () {
-                self.$el.html('');
-                self.$el.slideDown();
+                self.$el.empty().show();
+                //self.$el.show();
             });
         },
 
-        _editView: function () {
-
-            $('.form-control', this.$el).val('educational');
-        },
-
         _titleClick: function () {
-            $('.detailsView', this.$el).unbind('slideToggle').slideToggle(500);
-            this.$el.find('.titleView').toggleClass('bbn');
+            this.$el.find('.titleView').toggleClass('bbn').siblings().slideToggle(500);
         },
 
         _fetchTemplate: function () {
-            this.template = $(this.templateId).html();
+            if (this.templateId) {
+                if (!this.template)
+                    this.template = $(this.templateId).html();
+            } else
+                alert('template not found !');
         },
 
         _doSomething: function () {
             console.log('doing something!');
+        },
+
+        _trim: function (e) {
+            $('#' + e.currentTarget.id).val($('#' + e.currentTarget.id).val().trim());
         }
     });
 

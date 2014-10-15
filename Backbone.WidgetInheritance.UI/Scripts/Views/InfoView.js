@@ -5,20 +5,15 @@
 
     //base info view definition
     window.WI.Views.InfoView = Backbone.View.extend({
-        //default value for element. Expected to be overridden by child view.
+        //default value for element. Expected to be overridden in render function.
         el: 'body',
 
-        readOnlyTemplate: '',
-
-        editModeTemplate: '',
-
-        isReadOnly: true,
+        template: '',
 
         initialize: function () {
 
             //bind events here..
             this._bindEvents();
-
             //add child events and extend events object
             this.initializeChild();
         },
@@ -26,10 +21,11 @@
         //child view should override this
         initializeChild: function () { },
 
-        render: function () {
-            var html = Handlebars.compile(this.isReadOnly ? this.readOnlyTemplate : this.editModeTemplate)(this.model.toJSON());
-            this.$el.html(html);
+        render: function (container) {
+            this.renderChild(container);
         },
+
+        renderChild: function (container) { },
 
         events: {
             'click .btnEditInfo': function () { this.trigger("edit"); return false; },
@@ -41,17 +37,13 @@
 
         //to be oberridden by child view
         childEvents: {},
+        _bindChildEvents: function () { },
 
         _bindEvents: function () {
-            
+            //extend events object with child events.
+            this._bindChildEvents();
             _.extend(this.events, this.childEvents);
-            
-            //// when model is changed, change event is trigger, used for rendering
-            //this.listenTo(this.model, 'change', this.render);
-            //// if any error occurs while saving or fetching model, an error event is thrown
-            //this.listenTo(this.model, 'error', this._handleError);
-            //// when model is saved, sync event is raised
-            //this.listenTo(this.model, 'sync', this._saveSuccessHandler);
+
             // let view know that model is invalid
             this.listenTo(this.model, 'invalid', this.validateView);
 
