@@ -4,7 +4,7 @@
     window.WI.Views = window.WI.Views || {};
 
     //base info view definition
-    window.WI.Views.EducationalItineraryBaseView = window.WI.Views.ItineraryBaseView.extend({
+    window.WI.Views.AccommodationView = window.WI.Views.ItineraryBaseView.extend({
 
         //default value for element. Expected to be overridden by child view.
         el: '#accommodationView',
@@ -21,6 +21,7 @@
             this.$el.html(html);
         },
 
+        //child events will be added in base view events objects upon view instance creation.
         childEvents: {
             'focusout input:text': '_trim'
         },

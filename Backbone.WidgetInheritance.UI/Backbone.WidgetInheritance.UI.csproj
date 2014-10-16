@@ -64,7 +64,7 @@
     <Content Include="Scripts\Libraries\handlebars-1.3.js" />
     <Content Include="Scripts\Libraries\jquery-1.10.2.min.js" />
     <Content Include="Scripts\Libraries\underscore-min.js" />
-    <Content Include="Scripts\Models\AddressInfoModel.js" />
+    <Content Include="Scripts\Models\ActivityModel.js" />
     <Content Include="Scripts\Models\AccommodationModel.js" />
     <Content Include="Scripts\Models\ArrivalModel.js" />
     <Content Include="Scripts\Models\ItineraryBaseModel.js" />
@@ -80,7 +80,6 @@
     <Content Include="Style\bootstrap.css" />
     <Content Include="Style\Site.css" />
     <Content Include="Web.config" />
-    <Content Include="XMLFile1.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

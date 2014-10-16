@@ -6,22 +6,24 @@
     //base info view definition
     window.WI.Views.TourDetailsView = Backbone.View.extend({
 
-        el: '#headerRow',
+        el: '#applicationContainer',
 
         templateId: '#detailsView',
 
         template: '',
 
         initialize: function () {
-            this.template = $(this.templateId).html();
-            $('#bodyColumn').html(this.template);
         },
 
-        render: function () { },
+        render: function (container) {
+            this.el = container;
+            this.template = $(this.templateId).html();
+            this.$el.html(this.template);
+        },
 
         events: {
             'click #btnShowGeneralInfo': 'renderArrivalView',
-            'click #btnShowEducationalInfo': 'renderEducationalItineraryBaseView',
+            'click #btnShowEducationalInfo': 'renderAccommodationView',
             'click #btnShowAddressInfo': 'renderActivityView'
         },
 
@@ -45,7 +47,7 @@
             this.arrivalView.render('#arrivalView');
         },
 
-        renderEducationalItineraryBaseView: function () {
+        renderAccommodationView: function () {
             var self = this;
             if (!this.accommodationModel)
                 this.accommodationModel = new (window.WI.Models.AccommodationModel.extend({
@@ -56,29 +58,31 @@
                         Description: 'Hotel Address - 234 Standton Road, Johannesburg, 321, South Africa'
                     }
                 }));
-            if (!this.accommodationViewView)
-                this.accommodationViewView = new (window.WI.Views.EducationalItineraryBaseView.extend({
+            if (!this.accommodationView)
+                this.accommodationView = new (window.WI.Views.AccommodationView.extend({
                     model: self.accommodationModel
                 }));
-            this.accommodationViewView.render('#accommodationView');
+            this.accommodationView.render('#accommodationView');
         },
 
         renderActivityView: function () {
             var self = this;
-            if (!this.addressInfoModel)
-                this.addressInfoModel = new (window.WI.Models.AddressInfoModel.extend({
+            if (!this.activityModel)
+                this.activityModel = new (window.WI.Models.ActivityModel.extend({
                     defaults: {
                         isReadOnly: true,
-                        Stay: '4 Days 3 Nights',
+                        Day: '1-3',
+                        Time: '6.30 pm',
+                        Type: 'Hunting',
                         Location: '234 Standton Road, Johannesburg, 321, South Africa',
                         Description: 'Hotel Address - 234 Standton Road, Johannesburg, 321, South Africa'
                     }
                 }));
             if (!this.activityView)
                 this.activityView = new (window.WI.Views.ActivityView.extend({
-                    model: self.addressInfoModel
+                    model: self.activityModel
                 }));
-            this.activityView.render('#addressInfo');
+            this.activityView.render('#activityView');
         }
     });
 

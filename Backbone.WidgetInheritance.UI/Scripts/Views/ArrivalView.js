@@ -30,8 +30,6 @@
             });
         },
 
-        getDatFromServer: function () { },
-
         _editView: function (e) {
             this.validateView();
             this.model.set({ 'isReadOnly': false });
@@ -42,11 +40,11 @@
         _saveView: function () {
 
             this.model.set({
-                'Name': $('#txtEditName').val(),
-                'Place': $('#txtEditPlace').val(),
-                'Location': $('#txtEditLocation').val(),
-                'Time': $('#txtEditTime').val(),
-                'Vehicle': $('#txtEditVehicle').val()
+                'Name': $('#txtArrivalName').val(),
+                'Place': $('#txtArrivalPlace').val(),
+                'Location': $('#txtArrivalLocation').val(),
+                'Time': $('#txtArrivalTime').val(),
+                'Vehicle': $('#txtArrivalVehicle').val()
             });
 
             this.model.save();

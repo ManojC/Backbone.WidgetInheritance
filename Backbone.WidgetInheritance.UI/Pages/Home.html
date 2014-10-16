@@ -1,317 +1,381 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Home</title>
-    <link href="../Style/bootstrap.css" rel="stylesheet" />
-    <link href="../Style/Site.css" rel="stylesheet" />
-</head>
-<body>
+    <head>
+        <title>Home</title>
+        <link href="../Style/bootstrap.css" rel="stylesheet" />
+        <link href="../Style/Site.css" rel="stylesheet" />
+    </head>
+    <body>
 
-    <div id="applicationContainer" class="container mtm">
-        <div class="row">
-            <div class="col-lg-12">
-                <div id="header" class="container">
-                    <div id="headerRow" class="row">
-                        <div class="col-lg-4 text-center">
-                            <button id="btnShowGeneralInfo" class="btn btn-primary col-lg-12">Show General Info</button>
+        <div id="applicationContainer" class="container mtm"></div>
+
+        <script type="text/x-handlebars-template" id="detailsView">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div id="header" class="container">
+                                    <div id="headerRow" class="row">
+                                        <div class="col-lg-4 text-center">
+                                            <button id="btnShowGeneralInfo" class="btn btn-primary col-lg-12">Show General Info</button>
+                                        </div>
+                                        <div id="Div1" class="col-lg-4 text-center">
+                                            <button id="btnShowEducationalInfo" class="btn btn-primary col-lg-12">Show Educational Details</button>
+                                        </div>
+                                        <div id="Div2" class="col-lg-4 text-right">
+                                            <button id="btnShowAddressInfo" class="btn btn-primary col-lg-12">Show Address Details</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div id="Div1" class="col-lg-4 text-center">
-                            <button id="btnShowEducationalInfo" class="btn btn-primary col-lg-12">Show Educational Details</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mtm">
+                <div class="col-lg-12">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="container">
+                                    <div class="row">
+                                        <div id="messageViewContainer" class="col-lg-12">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div id="Div2" class="col-lg-4 text-center">
-                            <button id="btnShowAddressInfo" class="btn btn-primary col-lg-12">Show Address Details</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mtm">
+                <div class="col-lg-12">
+                    <div id="body" class="container">
+                        <div class="row">
+                            <div id="bodyColumn" class="col-lg-12 text-center">
+                                <div class="container mtm">
+                                    <div id="arrivalView" class="row"></div>
+                                    <div id="accommodationView" class="row mtm"></div>
+                                    <div id="activityView" class="row mtm"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row mtm">
-        <div class="col-lg-12">
-            <div class="container">
-                <div class="row">
-                    <div id="messageViewContainer" class="col-lg-12">
+            <div class="row mtm">
+                <div class="col-lg-12">
+                    <div id="footer" class="container">
+                        <div class="row">
+                            <div id="footerColumn" class="col-lg-12 text-center">Footer</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row mtm">
-        <div class="col-lg-12">
-            <div id="body" class="container">
-                <div class="row">
-                    <div id="bodyColumn" class="col-lg-12 text-center">Body</div>
+        </script>
+        <script type="text/x-handlebars-template" id="arrivalViewSection">
+            {{#if isReadOnly}}
+                <div class="col-lg-12">
+                    <div class="container pointer titleView ba bbn">
+                        <div class="row">
+                            <div class="col-lg-10 text-left">
+                                <h3>Arrival</h3>
+                            </div>
+                            <div class="col-lg-1">
+                                <button class="btn btn-primary col-lg-12 btnEditInfo mts">Edit</button>
+                            </div>
+                            <div class="col-lg-1">
+                                <button class="btn btn-danger col-lg-12 btnDeleteInfo mts">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container detailsView ba text-center">
+                        <div class="row mts">
+                            <div class="col-lg-2">Name</div>
+                            <div class="col-lg-3 text-left">
+                                <label id="lblName">{{Name}}</label>
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Place</div>
+                            <div class="col-lg-3 text-left">
+                                <label id="lblPlace">{{Place}}</label>
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Location</div>
+                            <div class="col-lg-3 text-left">
+                                <label id="lblArrivalLocation">{{Location}}</label>
+                            </div>
+                        </div>
+                        <div class="row mts bold">
+                            <div class="col-lg-2 col-lg-offset1-2">Pick Up</div>
+                        </div>
+                        <div class="row mts mbs">
+                            <div class="col-lg-2">Time</div>
+                            <div class="col-lg-3 text-left">
+                                <label id="lblTime">{{Time}}</label>
+                            </div>
+                            <div class="col-lg-2">Vehicle</div>
+                            <div class="col-lg-3 text-left">
+                                <label id="lblVehicle">{{Vehicle}}</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mtm">
-        <div class="col-lg-12">
-            <div id="footer" class="container">
-                <div class="row">
-                    <div id="footerColumn" class="col-lg-12 text-center">Footer</div>
+            {{else}}
+                <div class="col-lg-12">
+                    <div class="container pointer titleView ba bbn">
+                        <div class="row">
+                            <div class="col-lg-10 text-left">
+                                <h3>Arrival Edit</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container detailsView ba text-center">
+                        <div class="row mts">
+                            <div class="col-lg-2">Name</div>
+                            <div class="col-lg-3">
+                                <input id="txtArrivalName" type="text" value="{{Name}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Place</div>
+                            <div class="col-lg-3">
+                                <input id="txtArrivalPlace" type="text" value="{{Place}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Location</div>
+                            <div class="col-lg-3">
+                                <input id="txtArrivalLocation" type="text" value="{{Location}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mts bold">
+                            <div class="col-lg-2 col-lg-offset1-2">Pick Up</div>
+                        </div>
+                        <div class="row mts mbs">
+                            <div class="col-lg-2">Time</div>
+                            <div class="col-lg-3">
+                                <input id="txtArrivalTime" type="text" value="{{Time}}" class="form-control" />
+                            </div>
+                            <div class="col-lg-2">Vehicle</div>
+                            <div class="col-lg-3">
+                                <input id="txtArrivalVehicle" type="text" value="{{Vehicle}}" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container ba btpn">
+                        <div class="row mbs">
+                            <div class="col-lg-1 col-lg-offset-10">
+                                <button id="btnSaveGeneralInfo" class="btn btn-success col-lg-12 btnSaveInfo mts">Save</button>
+                            </div>
+                            <div class="col-lg-1">
+                                <button id="btnCancelGeneralInfo" class="btn btn-danger col-lg-12 btnCancelInfo mts">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            {{/if}}
 
-    <script type="text/x-handlebars-template" id="detailsView">
-        <div class="container mtm">
-            <div id="arrivalView" class="row"></div>
-            <div id="accommodationView" class="row mtm"></div>
-            <div id="addressInfo" class="row mtm"></div>
-        </div>
-    </script>
+        </script>
+        <script type="text/x-handlebars-template" id="accommodationViewSection">
+            {{#if isReadOnly}}
+                <div class="col-lg-12">
+                    <div class="container pointer titleView ba bbn">
+                        <div class="row">
+                            <div class="col-lg-10 text-left">
+                                <h3>Accommodation</h3>
+                            </div>
+                            <div class="col-lg-1">
+                                <button class="btn btn-primary col-lg-12 btnEditInfo mts">Edit</button>
+                            </div>
+                            <div class="col-lg-1">
+                                <button class="btn btn-danger col-lg-12 btnDeleteInfo mts">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container detailsView ba text-center">
+                        <div class="row mts">
+                            <div class="col-lg-2">Stay</div>
+                            <div class="col-lg-3 text-left">
+                                <label id="lblStay">{{Stay}}</label>
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Location</div>
+                            <div class="col-lg-3 text-left">
+                                <label id="lblLocation">{{Location}}</label>
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Description</div>
+                            <div class="col-lg-3 text-left">
+                                <label id="lblAccommodationDescription">{{Description}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{else}}
+                <div class="col-lg-12">
+                    <div class="container pointer titleView ba bbn">
+                        <div class="row">
+                            <div class="col-lg-10 text-left">
+                                <h3>Accommodation Edit</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container detailsView ba text-center">
+                        <div class="row mts">
+                            <div class="col-lg-2">Stay</div>
+                            <div class="col-lg-3">
+                                <input id="txtAccommodationStay" type="text" value="{{Stay}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Location</div>
+                            <div class="col-lg-3">
+                                <input id="txtAccommodationLocation" type="text" value="{{Location}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Description</div>
+                            <div class="col-lg-3">
+                                <textarea id="txtAccommodationDescription" class="form-control">{{Description}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container ba btpn">
+                        <div class="row mbs">
+                            <div class="col-lg-1 col-lg-offset-10">
+                                <button id="Button1" class="btn btn-success col-lg-12 btnSaveInfo mts">Save</button>
+                            </div>
+                            <div class="col-lg-1">
+                                <button id="Button2" class="btn btn-danger col-lg-12 btnCancelInfo mts">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+        </script>
+        <script type="text/x-handlebars-template" id="activityViewSection">
+            {{#if isReadOnly}}
+                <div class="col-lg-12">
+                    <div class="container pointer titleView ba bbn">
+                        <div class="row">
+                            <div class="col-lg-10 text-left">
+                                <h3>Activity</h3>
+                            </div>
+                            <div class="col-lg-1">
+                                <button class="btn btn-primary col-lg-12 btnEditInfo mts">Edit</button>
+                            </div>
+                            <div class="col-lg-1">
+                                <button class="btn btn-danger col-lg-12 btnDeleteInfo mts">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container detailsView ba text-center">
+                        <div class="row mts">
+                            <div class="col-lg-2">Day</div>
+                            <div class="col-lg-3 text-left">
+                                <label id="lblActivityDay">{{Day}}</label>
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Time</div>
+                            <div class="col-lg-3 text-left">
+                                <label id="lblActivityTime">{{Time}}</label>
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Location</div>
+                            <div class="col-lg-3 text-left">
+                                <label id="lblActivityLocation">{{Location}}</label>
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Type</div>
+                            <div class="col-lg-3 text-left">
+                                <label id="lblActivityType">{{Type}}</label>
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Description</div>
+                            <div class="col-lg-3 text-left">
+                                <label id="lblActivityDescription">{{Description}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{else}}
+                <div class="col-lg-12">
+                    <div class="container pointer titleView ba bbn">
+                        <div class="row">
+                            <div class="col-lg-10 text-left">
+                                <h3>Activity Edit</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container detailsView ba text-center">
+                        <div class="row mts">
+                            <div class="col-lg-2">Day</div>
+                            <div class="col-lg-3">
+                                <input id="txtActivityDay" type="text" value="{{Day}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Time</div>
+                            <div class="col-lg-3">
+                                <input id="txtActivityTime" type="text" value="{{Time}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Location</div>
+                            <div class="col-lg-3">
+                                <input id="txtActivityLocation" type="text" value="{{Location}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Type</div>
+                            <div class="col-lg-3">
+                                <input id="txtActivityType" type="text" value="{{Type}}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mts">
+                            <div class="col-lg-2">Description</div>
+                            <div class="col-lg-3">
+                                <textarea id="txtActivityDescription" class="form-control">{{Description}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container ba btpn">
+                        <div class="row mbs">
+                            <div class="col-lg-1 col-lg-offset-10">
+                                <button id="Button3" class="btn btn-success col-lg-12 btnSaveInfo mts">Save</button>
+                            </div>
+                            <div class="col-lg-1">
+                                <button id="Button4" class="btn btn-danger col-lg-12 btnCancelInfo mts">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+        </script>
 
-    <script type="text/x-handlebars-template" id="arrivalViewSection">
-        {{#if isReadOnly}}
-        <div class="col-lg-12">
-            <div class="container pointer titleView ba bbn">
-                <div class="row">
-                    <div class="col-lg-10 text-left">
-                        <h3>Arrival</h3>
-                    </div>
-                    <div class="col-lg-1">
-                        <button class="btn btn-primary col-lg-12 btnEditInfo mts">Edit</button>
-                    </div>
-                    <div class="col-lg-1">
-                        <button class="btn btn-danger col-lg-12 btnDeleteInfo mts">Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="container detailsView ba pas text-center">
-                <div class="row mts">
-                    <div class="col-lg-2">Name</div>
-                    <div class="col-lg-3 text-left">
-                        <label id="lblName">{{Name}}</label>
-                    </div>
-                </div>
-                <div class="row mts">
-                    <div class="col-lg-2">Place</div>
-                    <div class="col-lg-3 text-left">
-                        <label id="lblPlace">{{Place}}</label>
-                    </div>
-                </div>
-                <div class="row mts">
-                    <div class="col-lg-2">Location</div>
-                    <div class="col-lg-3 text-left">
-                        <label id="lblArrivalLocation">{{Location}}</label>
-                    </div>
-                </div>
-                <div class="row mts bold">
-                    <div class="col-lg-2 col-lg-offset1-2">Pick Up</div>
-                </div>
-                <div class="row mts mbs">
-                    <div class="col-lg-2">Time</div>
-                    <div class="col-lg-3 text-left">
-                        <label id="lblTime">{{Time}}</label>
-                    </div>
-                    <div class="col-lg-2">Vehicle</div>
-                    <div class="col-lg-3 text-left">
-                        <label id="lblVehicle">{{Vehicle}}</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{else}}
-        <div class="col-lg-12">
-            <div class="container pointer titleView ba bbn">
-                <div class="row">
-                    <div class="col-lg-10 text-left">
-                        <h3>Arrival Edit</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="container detailsView ba pas text-center">
-                <div class="row mts">
-                    <div class="col-lg-2">Name</div>
-                    <div class="col-lg-3">
-                        <input id="txtEditName" type="text" value="{{Name}}" class="form-control" />
-                    </div>
-                </div>
-                <div class="row mts">
-                    <div class="col-lg-2">Place</div>
-                    <div class="col-lg-3">
-                        <input id="txtEditPlace" type="text" value="{{Place}}" class="form-control" />
-                    </div>
-                </div>
-                <div class="row mts">
-                    <div class="col-lg-2">Location</div>
-                    <div class="col-lg-3">
-                        <input id="txtEditArrivaalLocation" type="text" value="{{Location}}" class="form-control" />
-                    </div>
-                </div>
-                <div class="row mts bold">
-                    <div class="col-lg-2 col-lg-offset1-2">Pick Up</div>
-                </div>
-                <div class="row mts mbs">
-                    <div class="col-lg-2">Time</div>
-                    <div class="col-lg-3">
-                        <input id="txtEditTime" type="text" value="{{Time}}" class="form-control" />
-                    </div>
-                    <div class="col-lg-2">Vehicle</div>
-                    <div class="col-lg-3">
-                        <input id="txtEditVehicle" type="text" value="{{Vehicle}}" class="form-control" />
-                    </div>
-                </div>
-            </div>
-            <div class="container ba btpn">
-                <div class="row mbs">
-                    <div class="col-lg-1 col-lg-offset-10">
-                        <button id="btnSaveGeneralInfo" class="btn btn-success col-lg-12 btnSaveInfo mts">Save</button>
-                    </div>
-                    <div class="col-lg-1">
-                        <button id="btnCancelGeneralInfo" class="btn btn-danger col-lg-12 btnCancelInfo mts">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{/if}}
-
-    </script>
-
-    <script type="text/x-handlebars-template" id="accommodationViewSection">
-        {{#if isReadOnly}}
-        <div class="col-lg-12">
-            <div class="container pointer titleView ba bbn">
-                <div class="row">
-                    <div class="col-lg-10 text-left">
-                        <h3>Accommodation</h3>
-                    </div>
-                    <div class="col-lg-1">
-                        <button class="btn btn-primary col-lg-12 btnEditInfo mts">Edit</button>
-                    </div>
-                    <div class="col-lg-1">
-                        <button class="btn btn-danger col-lg-12 btnDeleteInfo mts">Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="container detailsView ba pas text-center">
-                <div class="row mts">
-                    <div class="col-lg-2">Stay</div>
-                    <div class="col-lg-3 text-left">
-                        <label id="lblStay">{{Stay}}</label>
-                    </div>
-                </div>
-                <div class="row mts">
-                    <div class="col-lg-2">Location</div>
-                    <div class="col-lg-3 text-left">
-                        <label id="lblLocation">{{Location}}</label>
-                    </div>
-                </div>
-                <div class="row mts">
-                    <div class="col-lg-2">Description</div>
-                    <div class="col-lg-3 text-left">
-                        <label id="lblAccommodationDescription">{{Description}}</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{else}}
-        <div class="col-lg-12">
-            <div class="container pointer titleView ba bbn">
-                <div class="row">
-                    <div class="col-lg-10 text-left">
-                        <h3>Accommodation Edit</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="container detailsView ba pas text-center">
-                <div class="row mts">
-                    <div class="col-lg-2">Stay</div>
-                    <div class="col-lg-3">
-                        <input id="txtAccommodationStay" type="text" value="{{Stay}}" class="form-control" />
-                    </div>
-                </div>
-                <div class="row mts">
-                    <div class="col-lg-2">Location</div>
-                    <div class="col-lg-3">
-                        <input id="txtAccommodationLocation" type="text" value="{{Location}}" class="form-control" />
-                    </div>
-                </div>
-                <div class="row mts">
-                    <div class="col-lg-2">Description</div>
-                    <div class="col-lg-3">
-                        <textarea id="txtAccommodationDescription" class="form-control">{{Description}}</textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="container ba btpn">
-                <div class="row mbs">
-                    <div class="col-lg-1 col-lg-offset-10">
-                        <button id="Button1" class="btn btn-success col-lg-12 btnSaveInfo mts">Save</button>
-                    </div>
-                    <div class="col-lg-1">
-                        <button id="Button2" class="btn btn-danger col-lg-12 btnCancelInfo mts">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{/if}}
-
-    </script>
-    <script type="text/x-handlebars-template" id="addressInfoSection">
-        <div class="col-lg-12">
-            <div class="container titleView pointer ba bbn">
-                <div class="row">
-                    <div class="col-lg-10 text-left">
-                        <h3>Address Information</h3>
-                    </div>
-                    <div class="col-lg-1">
-                        <button class="btn btn-primary col-lg-12 btnEditInfo mts">Edit</button>
-                    </div>
-                    <div class="col-lg-1">
-                        <button class="btn btn-danger col-lg-12 btnDeleteInfo mts">Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="container detailsView ba pas text-left">
-                <div class="row mts">
-                    <div class="col-lg-2">Address1</div>
-                    <div class="col-lg-3">
-                        <input type="text" value="" class="form-control" />
-                    </div>
-                </div>
-                <div class="row mts">
-                    <div class="col-lg-2">Address2</div>
-                    <div class="col-lg-3">
-                        <input type="text" value="" class="form-control" />
-                    </div>
-                </div>
-                <div class="row mts">
-                    <div class="col-lg-2">City</div>
-                    <div class="col-lg-3">
-                        <input type="datetime" value="" class="form-control" />
-                    </div>
-                </div>
-                <div class="row mts mbs">
-                    <div class="col-lg-2">Country</div>
-                    <div class="col-lg-3">
-                        <input type="datetime" value="" class="form-control" />
-                    </div>
-                </div>
-                <div class="row mts mbs">
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-3">
-                        <button id="btnSaveAddressInfo" class="btn btn-success col-lg-12 btnSaveInfo">Save Information</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </script>
-
-    <script type="text/javascript" src="../Scripts/Libraries/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="../Scripts/Libraries/underscore-min.js"></script>
-    <script type="text/javascript" src="../Scripts/Libraries/backbone-min.js"></script>
-    <script type="text/javascript" src="../Scripts/Libraries/handlebars-1.3.js"></script>
-    <script type="text/javascript" src="../Scripts/Models/ItineraryBaseModel.js"></script>
-    <script type="text/javascript" src="../Scripts/Models/ArrivalModel.js"></script>
-    <script type="text/javascript" src="../Scripts/Models/AccommodationModel.js"></script>
-    <script type="text/javascript" src="../Scripts/Views/ItineraryBaseView.js"></script>
-    <script type="text/javascript" src="../Scripts/Views/ArrivalView.js"></script>
-    <script type="text/javascript" src="../Scripts/Views/AccommodationView.js"></script>
-    <script type="text/javascript" src="../Scripts/Views/ActivityView.js"></script>
-    <script type="text/javascript" src="../Scripts/Views/TourDetailsView.js"></script>
-    <script type="text/javascript" src="../Scripts/AppStart/AppStart.js"></script>
-</body>
+        <script type="text/javascript" src="../Scripts/Libraries/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="../Scripts/Libraries/underscore-min.js"></script>
+        <script type="text/javascript" src="../Scripts/Libraries/backbone-min.js"></script>
+        <script type="text/javascript" src="../Scripts/Libraries/handlebars-1.3.js"></script>
+        <script type="text/javascript" src="../Scripts/Models/ItineraryBaseModel.js"></script>
+        <script type="text/javascript" src="../Scripts/Models/ArrivalModel.js"></script>
+        <script type="text/javascript" src="../Scripts/Models/AccommodationModel.js"></script>
+        <script type="text/javascript" src="../Scripts/Views/ItineraryBaseView.js"></script>
+        <script type="text/javascript" src="../Scripts/Views/ArrivalView.js"></script>
+        <script type="text/javascript" src="../Scripts/Views/AccommodationView.js"></script>
+        <script type="text/javascript" src="../Scripts/Models/ActivityModel.js"></script>
+        <script type="text/javascript" src="../Scripts/Views/ActivityView.js"></script>
+        <script type="text/javascript" src="../Scripts/Views/TourDetailsView.js"></script>
+        <script type="text/javascript" src="../Scripts/AppStart/AppStart.js"></script>
+    </body>
 </html>
