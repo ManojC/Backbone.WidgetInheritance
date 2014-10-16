@@ -42,9 +42,10 @@
                 }));
             if (!this.arrivalView)
                 this.arrivalView = new (window.WI.Views.ArrivalView.extend({
+                    el: '#arrivalView',
                     model: self.arrivalModel
                 }));
-            this.arrivalView.render('#arrivalView');
+            this.arrivalView.render();
         },
 
         renderAccommodationView: function () {
@@ -60,9 +61,10 @@
                 }));
             if (!this.accommodationView)
                 this.accommodationView = new (window.WI.Views.AccommodationView.extend({
+                    el: '#accommodationView',
                     model: self.accommodationModel
                 }));
-            this.accommodationView.render('#accommodationView');
+            this.accommodationView.render();
         },
 
         renderActivityView: function () {
@@ -80,9 +82,10 @@
                 }));
             if (!this.activityView)
                 this.activityView = new (window.WI.Views.ActivityView.extend({
+                    el: '#activityView',
                     model: self.activityModel
                 }));
-            this.activityView.render('#activityView');
+            this.activityView.render();
         }
     });
 

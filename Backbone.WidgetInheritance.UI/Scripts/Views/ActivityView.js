@@ -6,16 +6,12 @@
     //base info view definition
     window.WI.Views.ActivityView = window.WI.Views.ItineraryBaseView.extend({
 
-        //default value for element. Expected to be overridden by child view.
-        el: '#activityView',
-
         templateId: '#activityViewSection',
 
         //this can be overridden by child view for custom event handling..
         initializeChild: function () { },
 
-        renderChild: function (container) {
-            this.el = container;
+        renderChild: function () {
             var html = Handlebars.compile(this.template)(this.model.toJSON());
             this.$el.html(html);
         },
