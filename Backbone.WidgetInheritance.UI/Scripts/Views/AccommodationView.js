@@ -4,12 +4,12 @@
     window.WI.Views = window.WI.Views || {};
 
     //base info view definition
-    window.WI.Views.EducationalInfoView = window.WI.Views.InfoView.extend({
+    window.WI.Views.EducationalItineraryBaseView = window.WI.Views.ItineraryBaseView.extend({
 
         //default value for element. Expected to be overridden by child view.
-        el: '#educationalInfo',
+        el: '#accommodationView',
 
-        templateId: '#educationalInfoSection',
+        templateId: '#accommodationViewSection',
 
         //this can be overridden by child view for custom event handling..
         initializeChild: function () {

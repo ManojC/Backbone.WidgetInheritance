@@ -4,7 +4,7 @@
     window.WI.Models = window.WI.Models || {};
 
     //base info view definition
-    window.WI.Models.InfoModel = Backbone.Model.extend({
+    window.WI.Models.ItineraryBaseModel = Backbone.Model.extend({
 
         fetch: function () { },
 
@@ -23,8 +23,8 @@
     window.WI = window.WI || {};
     window.WI.Collections = window.WI.Collections || {};
 
-    window.WI.Collections.InfoCollection = Backbone.Collection.extend({
-        model: window.WI.Models.InfoModel,
+    window.WI.Collections.ItineraryBaseCollection = Backbone.Collection.extend({
+        model: window.WI.Models.ItineraryBaseModel,
 
         fetchAll: function (options) {
         }

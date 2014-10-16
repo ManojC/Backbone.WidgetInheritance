@@ -4,7 +4,7 @@
     window.WI.Views = window.WI.Views || {};
 
     //base info view definition
-    window.WI.Views.DetailsView = Backbone.View.extend({
+    window.WI.Views.TourDetailsView = Backbone.View.extend({
 
         el: '#headerRow',
 
@@ -20,15 +20,15 @@
         render: function () { },
 
         events: {
-            'click #btnShowGeneralInfo': 'renderGeneralInfoView',
-            'click #btnShowEducationalInfo': 'renderEducationalInfoView',
-            'click #btnShowAddressInfo': 'renderAddressInfoView'
+            'click #btnShowGeneralInfo': 'renderArrivalView',
+            'click #btnShowEducationalInfo': 'renderEducationalItineraryBaseView',
+            'click #btnShowAddressInfo': 'renderActivityView'
         },
 
-        renderGeneralInfoView: function () {
+        renderArrivalView: function () {
             var self = this;
-            if (!this.generalInfoModel)
-                this.generalInfoModel = new (window.WI.Models.GeneralInfoModel.extend({
+            if (!this.arrivalModel)
+                this.arrivalModel = new (window.WI.Models.ArrivalModel.extend({
                     defaults: {
                         isReadOnly: true,
                         Name: '2pm airport drop ',
@@ -38,17 +38,17 @@
                         Vehicle: 'Bus'
                     }
                 }));
-            if (!this.generalInfoView)
-                this.generalInfoView = new (window.WI.Views.GeneralInfoView.extend({
-                    model: self.generalInfoModel
+            if (!this.arrivalView)
+                this.arrivalView = new (window.WI.Views.ArrivalView.extend({
+                    model: self.arrivalModel
                 }));
-            this.generalInfoView.render('#generalInfo');
+            this.arrivalView.render('#arrivalView');
         },
 
-        renderEducationalInfoView: function () {
+        renderEducationalItineraryBaseView: function () {
             var self = this;
-            if (!this.educationalInfoModel)
-                this.educationalInfoModel = new (window.WI.Models.EducationalInfoModel.extend({
+            if (!this.accommodationModel)
+                this.accommodationModel = new (window.WI.Models.AccommodationModel.extend({
                     defaults: {
                         isReadOnly: true,
                         Stay: '4 Days 3 Nights',
@@ -56,14 +56,14 @@
                         Description: 'Hotel Address - 234 Standton Road, Johannesburg, 321, South Africa'
                     }
                 }));
-            if (!this.educationalInfoView)
-                this.educationalInfoView = new (window.WI.Views.EducationalInfoView.extend({
-                    model: self.educationalInfoModel
+            if (!this.accommodationViewView)
+                this.accommodationViewView = new (window.WI.Views.EducationalItineraryBaseView.extend({
+                    model: self.accommodationModel
                 }));
-            this.educationalInfoView.render('#educationalInfo');
+            this.accommodationViewView.render('#accommodationView');
         },
 
-        renderAddressInfoView: function () {
+        renderActivityView: function () {
             var self = this;
             if (!this.addressInfoModel)
                 this.addressInfoModel = new (window.WI.Models.AddressInfoModel.extend({
@@ -74,11 +74,11 @@
                         Description: 'Hotel Address - 234 Standton Road, Johannesburg, 321, South Africa'
                     }
                 }));
-            if (!this.addressInfoView)
-                this.addressInfoView = new (window.WI.Views.AddressInfoView.extend({
+            if (!this.activityView)
+                this.activityView = new (window.WI.Views.ActivityView.extend({
                     model: self.addressInfoModel
                 }));
-            this.addressInfoView.render('#addressInfo');
+            this.activityView.render('#addressInfo');
         }
     });
 

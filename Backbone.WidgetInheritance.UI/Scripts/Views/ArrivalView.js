@@ -4,16 +4,15 @@
     window.WI.Views = window.WI.Views || {};
 
     //base info view definition
-    window.WI.Views.GeneralInfoView = window.WI.Views.InfoView.extend({
+    window.WI.Views.ArrivalView = window.WI.Views.ItineraryBaseView.extend({
 
         //default value for element. Expected to be overridden in render function.
-        el: '#generalInfo',
+        el: '#arrivalView',
 
-        templateId: '#generalInfoSection',
+        templateId: '#arrivalViewSection',
 
         //this can be overridden by child view for custom event handling..
-        initializeChild: function () {
-        },
+        initializeChild: function () { },
 
         renderChild: function (container) {
             this.el = container;

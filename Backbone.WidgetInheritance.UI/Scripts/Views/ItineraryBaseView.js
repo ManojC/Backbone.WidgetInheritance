@@ -4,7 +4,7 @@
     window.WI.Views = window.WI.Views || {};
 
     //base info view definition
-    window.WI.Views.InfoView = Backbone.View.extend({
+    window.WI.Views.ItineraryBaseView = Backbone.View.extend({
         //default value for element. Expected to be overridden in render function.
         el: 'body',
 

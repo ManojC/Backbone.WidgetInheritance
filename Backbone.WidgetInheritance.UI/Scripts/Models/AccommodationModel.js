@@ -4,7 +4,7 @@
     window.WI.Models = window.WI.Models || {};
 
     //base info view definition
-    window.WI.Models.EducationalInfoModel = window.WI.Models.InfoModel.extend({
+    window.WI.Models.AccommodationModel = window.WI.Models.ItineraryBaseModel.extend({
         isValid: false,
         fetch: function () { },
 
@@ -25,9 +25,9 @@
     window.WI = window.WI || {};
     window.WI.Collections = window.WI.Collections || {};
 
-    window.WI.Collections.EducationalInfoCollection = window.WI.Collections.InfoCollection.extend({
+    window.WI.Collections.AccommodationoCollection = window.WI.Collections.ItineraryBaseCollection.extend({
 
-        model: window.WI.Models.EducationalInfoModel,
+        model: window.WI.Models.AccommodationModel,
 
         fetchAll: function (options) {
         }

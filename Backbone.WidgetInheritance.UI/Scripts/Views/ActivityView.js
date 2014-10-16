@@ -4,7 +4,7 @@
     window.WI.Views = window.WI.Views || {};
 
     //base info view definition
-    window.WI.Views.AddressInfoView = window.WI.Views.InfoView.extend({
+    window.WI.Views.ActivityView = window.WI.Views.ItineraryBaseView.extend({
 
         //default value for element. Expected to be overridden by child view.
         el: '#addressInfo',

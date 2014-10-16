@@ -4,7 +4,7 @@
     window.WI.Models = window.WI.Models || {};
 
     //base info view definition
-    window.WI.Models.GeneralInfoModel = window.WI.Models.InfoModel.extend({
+    window.WI.Models.ArrivalModel = window.WI.Models.ItineraryBaseModel.extend({
         isValid: false,
         fetch: function () { },
 
@@ -31,9 +31,9 @@
     window.WI = window.WI || {};
     window.WI.Collections = window.WI.Collections || {};
 
-    window.WI.Collections.GeneralInfoCollection = window.WI.Collections.InfoCollection.extend({
+    window.WI.Collections.ArrivalCollection = window.WI.Collections.ItineraryBaseCollection.extend({
 
-        model: window.WI.Models.GeneralInfoModel,
+        model: window.WI.Models.ArrivalModel,
 
         fetchAll: function (options) {
         }
